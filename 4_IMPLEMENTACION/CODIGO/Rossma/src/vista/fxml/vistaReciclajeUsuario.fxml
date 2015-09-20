@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="315.0" prefWidth="450.0" styleClass="tool-bar2" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorReciclajeUsuario">
+   <children>
+      <TextField fx:id="txtRestaurar" layoutX="14.0" layoutY="64.0" />
+      <TableView fx:id="tablaReciclaje" layoutY="146.0" onMouseClicked="#click_tabla" opacity="0.58" prefHeight="169.0" prefWidth="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="146.0">
+        <columns>
+          <TableColumn fx:id="tcUsuario" prefWidth="150.0" text="Usuario" />
+          <TableColumn fx:id="tcNombre" prefWidth="150.0" text="Nombre" />
+            <TableColumn fx:id="tcTipo" prefWidth="100.0" text="Tipo" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnRestaurar" layoutX="294.0" layoutY="69.0" mnemonicParsing="false" onAction="#click_restaurar" text="Restaurar" />
+   </children>
+</AnchorPane>

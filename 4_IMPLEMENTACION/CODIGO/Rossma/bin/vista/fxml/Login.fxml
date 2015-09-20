@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="493.0" prefWidth="425.0" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorLogin">
+   <children>
+      <ImageView fitHeight="418.0" fitWidth="425.0" layoutY="75.0" pickOnBounds="true">
+         <image>
+            <Image url="@../imagenes/rossma.png" />
+         </image>
+      </ImageView>
+      <Accordion fx:id="accLogin" prefHeight="493.0" prefWidth="425.0">
+        <panes>
+          <TitledPane fx:id="tpServidor" animated="false" onMouseClicked="#click_titledServidor" styleClass="tabB" text="Configuracion de base de datos.">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tool-bar2">
+                     <children>
+                        <TextField fx:id="txtIP" layoutX="138.0" layoutY="25.0" promptText="127.0.0.1" />
+                        <TextField fx:id="txtPuerto" layoutX="138.0" layoutY="85.0" promptText="5432" />
+                        <TextField fx:id="txtBaseDatos" layoutX="138.0" layoutY="144.0" promptText="Base de Datos" />
+                        <TextField fx:id="txtUsuarioo" layoutX="138.0" layoutY="207.0" promptText="Usuario" />
+                        <Button fx:id="btnConectar" layoutX="148.0" layoutY="343.0" mnemonicParsing="false" onAction="#click_btnConectar" text="Conectar" />
+                        <Label layoutX="82.0" layoutY="32.0" text="IP:" />
+                        <Label layoutX="62.0" layoutY="92.0" text="Puerto:" />
+                        <Label layoutX="45.0" layoutY="149.0" text="Base de datos:" />
+                        <Label layoutX="67.0" layoutY="214.0" text="Usuario:" />
+                        <Label layoutX="52.0" layoutY="272.0" text="Contraseña" />
+                        <Label fx:id="lblMensaje" layoutX="63.0" layoutY="373.0" prefHeight="25.0" prefWidth="276.0" />
+                        <PasswordField fx:id="txtContraseniaa" layoutX="138.0" layoutY="274.0" promptText="Contraseña" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="tpLogin" animated="false" styleClass="tabB" text="Iniciar sesion.">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="375.0" styleClass="tool-bar2">
+                     <children>
+                        <ImageView fitHeight="423.0" fitWidth="376.0" layoutY="-1.0" opacity="0.72" pickOnBounds="true" />
+                        <Label id="label" fx:id="lblUsuario" layoutX="154.0" layoutY="34.0" text="Usuario  :" textAlignment="CENTER" textFill="#f8f4f4" />
+                        <TextField id="textField" fx:id="txtUsuario" alignment="CENTER" layoutX="80.0" layoutY="80.0" promptText="Usuario" style="-fx-background-color: #fff;" styleClass="text-login" AnchorPane.leftAnchor="80.0" />
+                        <PasswordField fx:id="txtContrasenia" alignment="CENTER" layoutX="80.0" layoutY="221.0" promptText="***********" styleClass="text-login" AnchorPane.leftAnchor="80.0" />
+                        <Label id="label" fx:id="lblContraseña" layoutX="154.0" layoutY="186.0" text="Contraseña  :" textFill="#1b1a1a" />
+                        <Button fx:id="btnConectar" layoutX="115.0" layoutY="318.0" mnemonicParsing="false" onAction="#validarUsuario" prefHeight="40.0" prefWidth="147.0" styleClass="fondo" text="Ingresar" />
+                        <Label fx:id="lblSalida" layoutX="69.0" layoutY="403.0" prefHeight="25.0" prefWidth="285.0" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+   <effect>
+      <Glow />
+   </effect>
+</AnchorPane>

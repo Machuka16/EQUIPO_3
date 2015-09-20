@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1210.0" styleClass="AnchorPrincipal" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorProveedores">
+   <children>
+      <Pagination fx:id="paginador" layoutX="504.0" layoutY="386.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pageCount="100" prefHeight="265.0" prefWidth="692.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="504.0" AnchorPane.rightAnchor="14.0" />
+      <TitledPane animated="false" collapsible="false" layoutX="15.0" layoutY="30.0" prefHeight="205.0" prefWidth="1183.0" text="Proveedor" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="51.0">
+        <content>
+          <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1103.0" styleClass="tool-bar2">
+               <children>
+                  <GridPane prefHeight="150.0" prefWidth="1150.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="lblNombreProveedor" text="Proveedor" />
+                        <TextField fx:id="txtNombreProveedor" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtCP" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Label fx:id="lblCP" text="Código Postal" GridPane.columnIndex="6" />
+                        <Label fx:id="lblTelefono" text="Teléfono" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtTelefono" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Label fx:id="lblPais" text="País" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtPais" editable="false" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" text="Mexico" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="lblColonia" text="Colonia" GridPane.columnIndex="5" />
+                        <TextField fx:id="txtColonia" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtCelular" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <Label fx:id="lblCelular" text="Celular" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Label fx:id="lblEstado" text="Estado" GridPane.columnIndex="2" />
+                        <Label fx:id="lblMunicipio" text="Municipio" GridPane.columnIndex="3" />
+                        <TextField fx:id="txtMunicipio" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="lblLocalidad" prefHeight="63.0" text="Localidad" GridPane.columnIndex="4" />
+                        <TextField fx:id="txtLocalidad" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label fx:id="lblCalle" text="Calle" GridPane.columnIndex="7" />
+                        <TextField fx:id="txtCalle" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                        <Label fx:id="lblNumeroExterior" text="Número Exterior" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtNumeroExterior" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.rowIndex="4" />
+                        <Label fx:id="lblOtro" text="Otro" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtOtro" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <Label fx:id="lblEmail" text="Correo" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtEmail" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <Label fx:id="lblNumeroInterior" text="Número Interior" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtNumeroInterior" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbEstado" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TableView fx:id="tablaProveedores" layoutX="508.0" layoutY="332.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click_TableView" opacity="0.7" prefHeight="205.0" prefWidth="685.0" AnchorPane.leftAnchor="508.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="332.0">
+        <columns>
+          <TableColumn fx:id="nombreColumn" prefWidth="200.0" text="Nombre Proveedor" />
+            <TableColumn fx:id="paisColumn" prefWidth="100.0" text="País" />
+            <TableColumn fx:id="estadoColumn" prefWidth="100.0" text="Estado" />
+            <TableColumn fx:id="municipioColumn" prefWidth="100.0" text="Municipio" />
+            <TableColumn fx:id="calleColumn" prefWidth="150.0" text="Calle" />
+            <TableColumn fx:id="numeroExteriorColumn" prefWidth="100.0" text="Número Exterior" />
+            <TableColumn fx:id="numeroInteriorColumn" prefWidth="100.0" text="Número Interior" />
+            <TableColumn fx:id="coloniaColumn" prefWidth="150.0" text="Colonia" />
+            <TableColumn fx:id="localidadColumn" prefWidth="150.0" text="Localidad" />
+            <TableColumn fx:id="cpColumn" prefWidth="70.0" text="Código Postal" />
+            <TableColumn fx:id="emailColumn" prefWidth="150.0" text="Correo" />
+            <TableColumn fx:id="telefonoColumn" prefWidth="150.0" text="Teléfono" />
+            <TableColumn fx:id="celularColumn" prefWidth="150.0" text="Celular" />
+            <TableColumn fx:id="otroColumn" prefWidth="150.0" text="Otro" />
+        </columns>
+      </TableView>
+      <RadioButton fx:id="rbInactivos" layoutX="1021.0" layoutY="596.0" mnemonicParsing="false" onAction="#inactivos" text="Proveedores inactivos" textFill="WHITE" />
+      <TitledPane animated="false" collapsible="false" layoutX="16.0" layoutY="283.0" prefHeight="308.0" prefWidth="482.0" text="Contacto Proveedor" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="712.0">
+        <content>
+          <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="268.0" prefWidth="480.0" styleClass="tool-bar2">
+               <children>
+                  <GridPane layoutX="7.0" layoutY="83.6" prefHeight="159.0" prefWidth="438.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="77.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="103.0" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="72.99999237060547" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="txtCNombre" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.rowIndex="1" />
+                        <Label text="Nombre" />
+                        <Label text="Dirección" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtCDireccion" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.rowIndex="4" />
+                        <Label text="Apellido Paterno" GridPane.columnIndex="1" />
+                        <Label text="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtCApellidoP" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtCTelefono" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Correo" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label text="Apellido Materno" GridPane.columnIndex="2" />
+                        <TextField fx:id="txtCCorreo" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField fx:id="txtCApellidoM" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <ToolBar layoutX="152.0" layoutY="649.0" minHeight="-Infinity" prefHeight="40.0" prefWidth="1210.0" styleClass="tool-bar2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button id="buttonTop" fx:id="btnNuevo" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#limpiar" prefHeight="35.0" prefWidth="40.0" translateX="980.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Empty-Document-New-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Nuevo" />
+               </tooltip>
+            </Button>
+            <Button id="buttonTop" fx:id="btnAgregar" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Insertar" prefHeight="35.0" prefWidth="40.0" translateX="1000.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/filesaveas-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Guardar" />
+               </tooltip>
+            </Button>
+            <Button id="buttonTop" fx:id="btnEliminar" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Eliminar" prefHeight="35.0" prefWidth="40.0" translateX="1020.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Delete-File-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Eliminar" />
+               </tooltip></Button>
+         </items>
+      </ToolBar>
+      <Label fx:id="lblMensajes" layoutX="803.0" layoutY="289.0" prefHeight="29.0" prefWidth="384.0" />
+      <TextField fx:id="txtFiltrar" layoutX="545.0" layoutY="286.0" onKeyReleased="#buscarTexto" prefHeight="35.0" prefWidth="250.0" promptText="Buscar....." styleClass="buttonSearch" />
+      <ImageView fitHeight="35.0" fitWidth="60.0" layoutX="510.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/Xp-G5%20009.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblMensaje" alignment="CENTER" layoutX="338.0" layoutY="590.0" prefHeight="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

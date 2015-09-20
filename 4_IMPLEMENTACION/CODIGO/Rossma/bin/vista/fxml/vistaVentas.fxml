@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1210.0" styleClass="AnchorPrincipal" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorVentas">
+   <effect>
+      <InnerShadow />
+   </effect>
+   <children>
+      <Pagination fx:id="paginador" layoutX="8.0" layoutY="136.0" prefHeight="443.0" prefWidth="276.0" />
+      <ListView fx:id="listaProducto" layoutX="35.0" layoutY="177.0" onMouseClicked="#seleccionar" opacity="0.58" prefHeight="376.0" prefWidth="270.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="10.0" />
+      <ToolBar layoutX="14.0" layoutY="41.0" minHeight="-Infinity" prefHeight="40.0" prefWidth="1210.0" styleClass="tool-bar2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+            <Button id="buttonTop" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_limpiar" prefHeight="35.0" prefWidth="40.0" translateX="1000.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Empty-Document-New-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Nuevo" />
+               </tooltip>
+            </Button>
+          <Button id="buttonTop" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarVenta" prefHeight="35.0" prefWidth="40.0" translateX="1020.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/filesaveas-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Guardar" />
+               </tooltip></Button>
+        </items>
+      </ToolBar>
+      <TextField fx:id="txtBuscador" layoutX="57.0" layoutY="61.0" onKeyReleased="#buscarTexto" prefHeight="37.0" prefWidth="225.0" promptText="Buscar" styleClass="buttonSearch" />
+      <TitledPane collapsible="false" layoutX="329.0" layoutY="244.0" prefHeight="353.0" prefWidth="800.0" text="Detalle de la Venta">
+         <content>
+            <AnchorPane minHeight="-Infinity" prefHeight="327.0" prefWidth="798.0" styleClass="tool-bar2">
+               <children>
+                  <TableView fx:id="tablaVenta" layoutX="27.6" layoutY="72.0" opacity="0.58" prefHeight="178.0" prefWidth="760.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="20.0">
+                    <columns>
+                      <TableColumn fx:id="tcCantidad" prefWidth="100.0" text="Cantidad" />
+                      <TableColumn fx:id="tcDescripcion" prefWidth="350.0" text="Descripción" />
+                        <TableColumn fx:id="tcPrecio" prefWidth="100.0" text="Precio" />
+                        <TableColumn fx:id="tcSubtotal" prefWidth="100.0" text="Subtotal" />
+                        <TableColumn fx:id="tcEliminar" prefWidth="128.00003051757812" text="Eliminar" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="txtCantidad" layoutX="27.0" layoutY="40.0" prefHeight="37.0" prefWidth="60.0" text="1" AnchorPane.topAnchor="20.0" />
+                  <TextField fx:id="txtUnidad" layoutX="102.0" layoutY="40.0" prefHeight="37.0" prefWidth="70.0" AnchorPane.topAnchor="20.0" />
+                  <TextField fx:id="txtProducto" layoutX="187.0" layoutY="40.0" prefHeight="37.0" prefWidth="332.0" AnchorPane.topAnchor="20.0" />
+                  <TextField fx:id="txtExistencia" layoutX="535.0" layoutY="40.0" prefHeight="37.0" prefWidth="60.0" AnchorPane.topAnchor="20.0" />
+                  <TextField fx:id="txtPrecio" alignment="CENTER_RIGHT" layoutX="607.0" layoutY="40.0" prefHeight="37.0" prefWidth="80.0" AnchorPane.topAnchor="20.0" />
+                  <CheckBox fx:id="ckMayoreo" layoutX="704.0" layoutY="13.0" mnemonicParsing="false" onAction="#checkPrecios" text="Mayoreo" textFill="WHITE" AnchorPane.topAnchor="0.0" />
+                  <Button id="buttonTop" fx:id="btnAgregar" layoutX="697.0" layoutY="42.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#agregarVenta" prefHeight="35.0" prefWidth="40.0" AnchorPane.topAnchor="25.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Agregar producto" />
+                     </tooltip></Button>
+                  <TextField fx:id="txtTotal" alignment="CENTER_RIGHT" layoutX="646.0" layoutY="254.0" prefHeight="38.0" prefWidth="142.0" AnchorPane.rightAnchor="20.0" />
+                  <Label layoutX="187.0" layoutY="11.0" text="Producto" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="607.0" layoutY="12.0" text="Precio" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="565.0" layoutY="263.0" text="TOTAL " />
+                  <Label layoutX="535.0" layoutY="11.0" text="Existencia" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="27.0" layoutY="11.0" text="Cantidad" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="618.0" layoutY="49.0" text="\$" AnchorPane.topAnchor="30.0" />
+                  <Label layoutX="643.0" layoutY="263.0" text="\$" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <Separator layoutX="300.0" layoutY="56.0" orientation="VERTICAL" prefHeight="541.0" prefWidth="5.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="56.0" />
+      <TitledPane animated="false" collapsible="false" layoutX="329.0" layoutY="61.0" prefHeight="184.0" prefWidth="800.0" text="Venta" AnchorPane.topAnchor="51.0">
+        <content>
+          <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tool-bar2">
+               <children>
+                  <TextField fx:id="txtFolio" layoutX="37.0" layoutY="42.0" AnchorPane.topAnchor="25.0" />
+                  <TextField fx:id="txtVendedor" layoutX="37.0" layoutY="115.0" AnchorPane.topAnchor="85.0" />
+                  <Label layoutX="44.0" layoutY="19.0" text="Folio" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="45.0" layoutY="94.0" text="Vendedor" AnchorPane.topAnchor="65.0" />
+                  <Label layoutX="454.0" layoutY="94.0" text="Cliente" AnchorPane.topAnchor="65.0" />
+                  <ImageView fitHeight="53.0" fitWidth="165.0" layoutX="606.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../imagenes/Sin%20título-1.png" />
+                     </image>
+                  </ImageView>
+                  <ComboBox fx:id="cbCliente" layoutX="454.0" layoutY="117.0" onAction="#recuperarId" prefHeight="37.0" prefWidth="304.0" AnchorPane.topAnchor="85.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Label fx:id="lblMensaje" layoutX="41.0" layoutY="100.0" prefHeight="30.0" prefWidth="270.0" AnchorPane.leftAnchor="10.0" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="25.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0">
+         <image>
+            <Image url="@../imagenes/Xp-G5%20009.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblRegistro" alignment="CENTER" layoutX="64.0" layoutY="607.0" prefHeight="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

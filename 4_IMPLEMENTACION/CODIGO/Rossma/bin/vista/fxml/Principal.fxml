@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="1360.0" styleClass="AnchorPrincipal" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorPrincipal">
+   <center>
+      <AnchorPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1208.0" BorderPane.alignment="BOTTOM_CENTER">
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <ImageView fitHeight="507.0" fitWidth="962.0" layoutX="156.0" layoutY="73.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imagenes/logoR.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="636.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar orientation="VERTICAL" prefHeight="636.0" prefWidth="150.0" styleClass="tool-bar2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <Button fx:id="btnClientes" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="85.0" prefWidth="140.0" text="Clientes">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/User_male.png" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Agrega,edita y elimina tus clientes." />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnProveedor" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#proveedores" prefHeight="85.0" prefWidth="140.0" text="Proveedores">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Van-Behance-Front-256.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Agrega,edita y elimina tus proveedores" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnProductos" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#productos" prefHeight="85.0" prefWidth="140.0" text="Productos">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Shirt-256.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Registra los productos que manejas" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnStock" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#stock" prefHeight="85.0" prefWidth="140.0" text="Stock">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Caargo-256.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Visualiza las cantidades de productos que tienes." />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnVentas" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#ventas" prefHeight="85.0" prefWidth="140.0" text="Ventas">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Realiza ventas." />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnNuevoUsuario" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#usuarios" prefHeight="85.0" prefWidth="140.0" text="Usuarios">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" focusTraversable="true" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imagenes/Users-128.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Agrega,edita y elimina los usuarios de la aplicacion." />
+                     </tooltip>
+                  </Button>
+                  <Button id="buttonTop" fx:id="btnCerrar" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="90.0" prefWidth="90.0" textAlignment="CENTER" textOverrun="CLIP" translateX="25.0" translateY="15.0">
+                     <graphic>
+                        <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Shutdown%20Black%20and%20Gold-256.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Cerrar sesion." />
+                     </tooltip>
+                  </Button>
+              </items>
+            </ToolBar>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <ToolBar minHeight="-Infinity" prefHeight="55.0" prefWidth="1360.0" styleClass="tool-bar2" BorderPane.alignment="CENTER">
+        <items>
+          <Button id="buttonTop" fx:id="btnBase" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respaldo" prefHeight="40.0" prefWidth="50.0" textAlignment="CENTER" textOverrun="CLIP" translateX="10.0">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Database.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Respalda tu base de datos." />
+               </tooltip>
+            </Button>
+            <Button id="buttonTop" fx:id="btnDesarrolladores" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#desarrolladores" prefHeight="40.0" prefWidth="50.0" translateX="30.0">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Bullhorn.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="¿Quienes desarrollaron la aplicacion?" />
+               </tooltip>
+            </Button>
+            <Button id="buttonTop" fx:id="btnAyuda" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" translateX="40.0">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonTop" />
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Encuentra ayuda sobre la aplicacion." />
+               </tooltip>
+            </Button>
+            <Label id="label-tool" fx:id="lblModulo" alignment="CENTER" prefHeight="65.0" prefWidth="452.0" translateX="250.0" />
+            <ImageView fitHeight="50.0" fitWidth="161.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="550.0">
+               <image>
+                  <Image url="@../imagenes/Sin%20título-1.png" />
+               </image>
+            </ImageView>
+        </items>
+      </ToolBar>
+   </top>
+</BorderPane>

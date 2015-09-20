@@ -1,0 +1,1733 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.3.5
+-- Started on 2015-08-06 21:23:24
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 187 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2182 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 202 (class 1255 OID 33775)
+-- Name: fn_actualizar_categoria_de_productos(integer, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_categoria_de_productos(_idcategoria integer, _categoria character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+	begin
+		update categorias_de_productos
+		set categoria = _categoria
+		where id_categoria_producto = _idCategoria;
+	end
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_categoria_de_productos(_idcategoria integer, _categoria character varying) OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1255 OID 33777)
+-- Name: fn_actualizar_clientesfisicos(integer, character, character, character, character, character, character, character, character, integer, character, character, character, character, character, character, character, character, character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_clientesfisicos(id_clientefisico integer, c_pais character, c_estado character, c_municipio character, c_calle character, c_nexterior character, c_ninterior character, c_colonia character, c_localidad character, c_codigopostal integer, c_correo character, c_telefono character, c_celular character, c_otro character, c_tipo character, cf_rfc character, cf_nombre character, cf_apaterno character, cf_amaterno character) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update clientes set pais = c_pais, estado = c_estado, municipio = c_municipio, calle = c_calle, n_exterior = c_nExterior, n_interior = c_nInterior, colonia = c_colonia, 
+			localidad = c_localidad, codigo_postal = c_codigoPostal, correo = c_correo, telefono = c_telefono, celular = c_celular, otro = c_otro, tipo = c_tipo 
+	where codigo_cliente = id_clienteFisico;
+
+	update clientes_personas_fisicas set rfc = cf_rfc, nombre = cf_nombre, apellido_paterno = cf_aPaterno, apellido_materno = cf_aMaterno
+	where codigo_cliente = id_clienteFisico;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_clientesfisicos(id_clientefisico integer, c_pais character, c_estado character, c_municipio character, c_calle character, c_nexterior character, c_ninterior character, c_colonia character, c_localidad character, c_codigopostal integer, c_correo character, c_telefono character, c_celular character, c_otro character, c_tipo character, cf_rfc character, cf_nombre character, cf_apaterno character, cf_amaterno character) OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1255 OID 33778)
+-- Name: fn_actualizar_clientesmorales(integer, character, character, character, character, character, character, character, character, integer, character, character, character, character, character, character, character, character, character, character, character, character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_clientesmorales(id_clientemoral integer, c_pais character, c_estado character, c_municipio character, c_calle character, c_nexterior character, c_ninterior character, c_colonia character, c_localidad character, c_codigopostal integer, c_correo character, c_telefono character, c_celular character, c_otro character, c_tipo character, cm_rfc character, cm_empresa character, cm_nombre character, cm_apaterno character, cm_amaterno character, cm_telefono character, cm_correo character) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update clientes set pais = c_pais, estado = c_estado, municipio = c_municipio, calle = c_calle, n_exterior = c_nExterior, n_interior = c_nInterior, colonia = c_colonia, 
+			localidad = c_localidad, codigo_postal = c_codigoPostal, correo = c_correo, telefono = c_telefono, celular = c_celular, otro = c_otro, tipo = c_tipo 
+	where codigo_cliente = id_clienteMoral;
+
+	update clientes_personas_morales set rfc = cm_rfc, empresa = cm_empresa, nombre = cm_nombre, apellido_paterno = cm_aPaterno, apellido_materno = cm_aMaterno, telefono = cm_telefono, correo = cm_correo
+	where codigo_cliente = id_clienteMoral;
+
+end
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_clientesmorales(id_clientemoral integer, c_pais character, c_estado character, c_municipio character, c_calle character, c_nexterior character, c_ninterior character, c_colonia character, c_localidad character, c_codigopostal integer, c_correo character, c_telefono character, c_celular character, c_otro character, c_tipo character, cm_rfc character, cm_empresa character, cm_nombre character, cm_apaterno character, cm_amaterno character, cm_telefono character, cm_correo character) OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1255 OID 33774)
+-- Name: fn_actualizar_productos(integer, integer, character varying, character varying, character varying, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_productos(_idproducto integer, _idcategoria integer, _clave character varying, _unidad character varying, _descripcion character varying, _precio1 double precision, _precio2 double precision, _iva double precision, _actual double precision, _maxima double precision, _minima double precision) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+	begin
+		update productos
+		set id_categoria_producto = _idCategoria,
+		clave = _clave,
+		unidad_medida = _unidad,
+		descripcion = _descripcion,
+		precio1 = _precio1,
+		precio2 = _precio2,
+		porciento_iva = _iva,
+		existencia_actual = _actual,
+		existencia_maxima = _maxima,
+		existencia_minima = _minima
+		where codigo_producto = _idProducto;
+	end
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_productos(_idproducto integer, _idcategoria integer, _clave character varying, _unidad character varying, _descripcion character varying, _precio1 double precision, _precio2 double precision, _iva double precision, _actual double precision, _maxima double precision, _minima double precision) OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1255 OID 33776)
+-- Name: fn_actualizar_proveedor(integer, character, character, character, character, character, character, character, character, character, character, character, character, character, character, character, integer, character, character, character, character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_proveedor(id_proveedor integer, c_nombre character, c_apellido_paterno character, c_apellido_materno character, c_direccion character, c_telefono character, c_correo character, p_nombre character, p_pais character, p_estado character, p_municipio character, p_calle character, p_n_exterior character, p_n_interior character, p_colonia character, p_localidad character, p_codigo_postal integer, p_correo character, p_telefono character, p_celular character, p_otro character) RETURNS void
+    LANGUAGE plpgsql
+    AS $$ 
+
+begin
+
+
+	
+	update proveedores set nombre = p_nombre,pais = p_pais ,estado = p_estado,municipio = p_municipio,calle = p_calle, 
+			       n_exterior = p_n_exterior, n_interior = p_n_interior, colonia = p_colonia, localidad = p_localidad, codigo_postal = p_codigo_postal, 
+			       correo = p_correo, telefono = p_telefono,celular = p_celular, otro = p_otro where codigo_proveedor = id_proveedor;
+		 
+        update contactos_proveedores set nombre = c_nombre,apellido_paterno = c_apellido_paterno,apellido_materno = c_apellido_materno,direccion = c_direccion,
+					telefono = c_telefono,correo = c_correo where codigo_proveedor = id_proveedor;
+	
+        end;
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_proveedor(id_proveedor integer, c_nombre character, c_apellido_paterno character, c_apellido_materno character, c_direccion character, c_telefono character, c_correo character, p_nombre character, p_pais character, p_estado character, p_municipio character, p_calle character, p_n_exterior character, p_n_interior character, p_colonia character, p_localidad character, p_codigo_postal integer, p_correo character, p_telefono character, p_celular character, p_otro character) OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1255 OID 33773)
+-- Name: fn_actualizar_usuarios(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_actualizar_usuarios(_id integer, _usuario character varying, _contrasenia character varying, _tipo character varying, _nombre character varying, _paterno character varying, _materno character varying, _direccion character varying, _telefono character varying, _celular character varying, _correo character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+	begin
+		update usuarios set 
+		usuario = _usuario,
+		contrasenia = _contrasenia,
+		tipo = _tipo,
+		nombre = _nombre,
+		apellido_paterno = _paterno,
+		apellido_materno = _materno,
+		direccion = _direccion,
+		telefono = _telefono,
+		celular = _celular,
+		correo = _correo
+		where codigo_usuario = _id;
+	end
+$$;
+
+
+ALTER FUNCTION public.fn_actualizar_usuarios(_id integer, _usuario character varying, _contrasenia character varying, _tipo character varying, _nombre character varying, _paterno character varying, _materno character varying, _direccion character varying, _telefono character varying, _celular character varying, _correo character varying) OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1255 OID 33785)
+-- Name: fn_agregar_categorias_de_productos(text); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_categorias_de_productos(nombre text) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+declare maximo smallint;
+declare total smallint;
+begin
+	select count(id_categoria_producto) into total from categorias_de_productos;
+	if total = 0 then maximo:= 1;
+		else	
+		select (max(id_categoria_producto)+ 1) into maximo from categorias_de_productos ;
+	end if;
+	insert into categorias_de_productos (id_categoria_producto, categoria) values (maximo, nombre);
+end;
+
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_categorias_de_productos(nombre text) OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1255 OID 33789)
+-- Name: fn_agregar_cliente_fisico(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_cliente_fisico(pais character varying, estado character varying, municipio character varying, calle character varying, n_exterior character varying, n_interior character varying, colonia character varying, localidad character varying, codigo_postal integer, correo character varying, telefono character varying, celular character varying, otro character varying, rfc character varying, nombre character varying, apellido_paterno character varying, apellido_materno character varying, tipos character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$ 
+
+declare total smallint;
+declare maximo smallint;
+declare totalf smallint;
+declare maximof smallint;
+
+begin select count(codigo_cliente) into total from clientes;
+if total= 0 then maximo:=1;
+else select(max(codigo_cliente)+1) into maximo from clientes ;
+end if;
+
+select count(id_cliente_fisico) into totalf from clientes_personas_fisicas;
+if totalf= 0 then maximof:=1;
+else select (max(id_cliente_fisico)+1) into maximof from clientes_personas_fisicas ;
+end if;
+
+insert into clientes (codigo_cliente, pais, estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro,tipo) 
+values (maximo , pais,estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro,tipos);
+
+insert into clientes_personas_fisicas (id_cliente_fisico, codigo_cliente, rfc, nombre, apellido_paterno, apellido_materno) 
+values (maximof,maximo, rfc, nombre, apellido_paterno, apellido_materno) ;
+
+end;
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_cliente_fisico(pais character varying, estado character varying, municipio character varying, calle character varying, n_exterior character varying, n_interior character varying, colonia character varying, localidad character varying, codigo_postal integer, correo character varying, telefono character varying, celular character varying, otro character varying, rfc character varying, nombre character varying, apellido_paterno character varying, apellido_materno character varying, tipos character varying) OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1255 OID 33790)
+-- Name: fn_agregar_cliente_moral(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_cliente_moral(pais character varying, estado character varying, municipio character varying, calle character varying, n_exterior character varying, n_interior character varying, colonia character varying, localidad character varying, codigo_postal integer, correo character varying, telefono character varying, celular character varying, otro character varying, tipos character varying, rfc character varying, empresa character varying, nombre character varying, apellido_paterno character varying, apellido_materno character varying, telefono_c character varying, correo_c character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$ 
+
+declare total smallint;
+declare maximo smallint;
+declare totalm smallint;
+declare maximom smallint;
+
+
+begin 
+select count(codigo_cliente) into total from clientes;
+if total= 0 then maximo:=1;
+else select(max(codigo_cliente)+1) into maximo from clientes ;
+end if;
+
+select count(id_cliente_moral) into totalm from clientes_personas_morales;
+if totalm= 0 then maximom:=1;
+else select (max(id_cliente_moral)+1) into maximom from clientes_personas_morales ;
+end if;
+
+insert into clientes (codigo_cliente, pais, estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro,tipo) 
+values (maximo , pais,estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro,tipos);
+
+insert into clientes_personas_morales (id_cliente_moral, codigo_cliente, rfc, empresa, nombre, apellido_paterno, apellido_materno, telefono, correo) 
+values (maximom,maximo, rfc, empresa,nombre, apellido_paterno, apellido_materno, telefono_c, correo_c);
+
+end;
+
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_cliente_moral(pais character varying, estado character varying, municipio character varying, calle character varying, n_exterior character varying, n_interior character varying, colonia character varying, localidad character varying, codigo_postal integer, correo character varying, telefono character varying, celular character varying, otro character varying, tipos character varying, rfc character varying, empresa character varying, nombre character varying, apellido_paterno character varying, apellido_materno character varying, telefono_c character varying, correo_c character varying) OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1255 OID 33786)
+-- Name: fn_agregar_productos(integer, character varying, character varying, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_productos(categoria integer, medida character varying, des character varying, uno double precision, dos double precision, iva double precision, actual double precision, maxima double precision, minima double precision) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+declare maximo integer;
+declare total integer;
+	begin
+		select count(codigo_producto) into total from productos;
+		if total = 0 then maximo:= 1;
+			else
+			select (max(codigo_producto)+ 1) into maximo from productos;
+		end if;
+		insert into productos (codigo_producto, id_categoria_producto, unidad_medida, descripcion, precio1, precio2, porciento_iva, existencia_actual, existencia_maxima, existencia_minima)
+		values (maximo,  categoria, medida, des, uno, dos, iva, actual, maxima, minima);
+	end
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_productos(categoria integer, medida character varying, des character varying, uno double precision, dos double precision, iva double precision, actual double precision, maxima double precision, minima double precision) OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1255 OID 33788)
+-- Name: fn_agregar_proveedor(character, character, character, character, character, character, character, character, character, character, character, character, character, character, character, integer, character, character, character, character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_proveedor(c_nombre character, c_apellido_paterno character, c_apellido_materno character, c_direccion character, c_telefono character, c_correo character, p_nombre character, p_pais character, p_estado character, p_municipio character, p_calle character, p_n_exterior character, p_n_interior character, p_colonia character, p_localidad character, p_codigo_postal integer, p_correo character, p_telefono character, p_celular character, p_otro character) RETURNS void
+    LANGUAGE plpgsql
+    AS $$ 
+declare maximo_contacto smallint;
+declare total_contacto smallint;
+declare maximo_proveedor smallint;
+declare total_proveedor smallint;
+
+begin select count(id_contacto) into total_contacto from contactos_proveedores; 
+	if total_contacto = 0 then maximo_contacto:= 1;
+	else select(max(id_contacto) +1) into maximo_contacto from contactos_proveedores; 
+	end if;
+
+	select count(codigo_proveedor) into total_proveedor from proveedores; 
+	if total_proveedor = 0 then maximo_proveedor:= 1;
+	else select(max(codigo_proveedor) +1) into maximo_proveedor from proveedores; 
+
+	end if;
+	
+
+	
+	insert into proveedores (codigo_proveedor,nombre,pais,estado,municipio,calle,n_exterior,n_interior,colonia,localidad,codigo_postal,correo,telefono,celular,otro) 
+	
+				    values(maximo_proveedor,p_nombre,p_pais,p_estado,p_municipio,p_calle,p_n_exterior,p_n_interior,
+						p_colonia,p_localidad,p_codigo_postal,p_correo,p_telefono,p_celular,p_otro); 
+	
+	 
+        insert into contactos_proveedores (id_contacto,codigo_proveedor,nombre,apellido_paterno,apellido_materno,direccion,telefono,correo) 
+				    values(maximo_contacto,maximo_proveedor,c_nombre,c_apellido_paterno,c_apellido_materno,c_direccion,c_telefono,c_correo);
+	
+        end;
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_proveedor(c_nombre character, c_apellido_paterno character, c_apellido_materno character, c_direccion character, c_telefono character, c_correo character, p_nombre character, p_pais character, p_estado character, p_municipio character, p_calle character, p_n_exterior character, p_n_interior character, p_colonia character, p_localidad character, p_codigo_postal integer, p_correo character, p_telefono character, p_celular character, p_otro character) OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1255 OID 33787)
+-- Name: fn_agregar_usuario(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_agregar_usuario(usser character varying, pass character varying, tipo_fn character varying, nombre_fn character varying, ap_pa character varying, ap_ma character varying, direc character varying, tel character varying, cel character varying, email character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+declare maximo smallint;
+declare total smallint;
+begin
+	select count(codigo_usuario) into total from usuarios;
+		if total = 0 then maximo:= 1;
+			else
+			select (max(codigo_usuario)+ 1) into maximo from usuarios;
+		end if;
+	insert into usuarios (codigo_usuario, usuario, contrasenia, tipo, nombre, apellido_paterno, apellido_materno, direccion, telefono, celular, correo)
+	values (maximo, usser, pass, tipo_fn, nombre_fn, ap_Pa, ap_Ma, direc, tel, cel, email);
+end;
+$$;
+
+
+ALTER FUNCTION public.fn_agregar_usuario(usser character varying, pass character varying, tipo_fn character varying, nombre_fn character varying, ap_pa character varying, ap_ma character varying, direc character varying, tel character varying, cel character varying, email character varying) OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1255 OID 33780)
+-- Name: fn_eliminar_categorias_de_productos(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_categorias_de_productos(_idcategoria integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update categorias_de_productos set status = 'f' where id_categoria_producto = _idCategoria;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_categorias_de_productos(_idcategoria integer) OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1255 OID 33783)
+-- Name: fn_eliminar_clientefisico(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_clientefisico(id_clientefisico integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update clientes_personas_fisicas set status = 'f' where codigo_cliente = id_clienteFisico;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_clientefisico(id_clientefisico integer) OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1255 OID 33784)
+-- Name: fn_eliminar_clientemorales(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_clientemorales(id_clientemorales integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update clientes_personas_morales set status = 'f' where codigo_cliente = id_clienteMorales;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_clientemorales(id_clientemorales integer) OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1255 OID 33781)
+-- Name: fn_eliminar_productos(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_productos(_idproducto integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update productos set status = 'f' where codigo_producto = _idProducto; 
+end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_productos(_idproducto integer) OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1255 OID 33782)
+-- Name: fn_eliminar_proveedor(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_proveedor(_idproveedor integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update proveedores set status = 'f' where codigo_proveedor = _idProveedor;
+	update contactos_proveedores set status = 'f' where codigo_proveedor = _idProveedor;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_proveedor(_idproveedor integer) OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1255 OID 33779)
+-- Name: fn_eliminar_usuario(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_eliminar_usuario(codigo integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+	begin
+		update usuarios set status = 'f' where codigo_usuario = codigo;
+	end
+$$;
+
+
+ALTER FUNCTION public.fn_eliminar_usuario(codigo integer) OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1255 OID 33797)
+-- Name: fn_restaurar_productos(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_restaurar_productos(_idproducto integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update productos set status = 't' where codigo_producto = _idProducto; 
+end
+$$;
+
+
+ALTER FUNCTION public.fn_restaurar_productos(_idproducto integer) OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1255 OID 33798)
+-- Name: fn_restaurar_usuarios(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_restaurar_usuarios(_idusuario integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update usuarios set status = 't' where codigo_usuario = _idUsuario;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_restaurar_usuarios(_idusuario integer) OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1255 OID 33805)
+-- Name: fn_stock(integer, double precision, character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION fn_stock(codigoproducto integer, existenciaactual double precision, _causa character) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+begin
+	update productos set existencia_actual = existenciaActual, causa = _causa where codigo_producto = codigoProducto;
+end
+$$;
+
+
+ALTER FUNCTION public.fn_stock(codigoproducto integer, existenciaactual double precision, _causa character) OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1255 OID 33799)
+-- Name: funcion_ventas(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION funcion_ventas() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE canti boolean;
+BEGIN 
+
+	IF (NEW.cantidad < (select existencia_actual from productos where codigo_producto = NEW.codigo_producto)) 
+	THEN
+	 UPDATE productos set existencia_actual = existencia_actual - NEW.cantidad WHERE codigo_producto = NEW.codigo_producto;
+           RETURN NEW;
+              
+        ELSE
+         RETURN NULL;
+        END IF;
+END; 
+$$;
+
+
+ALTER FUNCTION public.funcion_ventas() OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1255 OID 33793)
+-- Name: recuperar_clientesfisicos(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION recuperar_clientesfisicos() RETURNS TABLE(codigofisico smallint, rfc character varying, nombre character varying, apaterno character varying, amaterno character varying, nombrecompleto text, pais character varying, estado character varying, municipio character varying, calle character varying, nexterior character varying, ninterior character varying, colonia character varying, localidad character varying, codpostal integer, direccioncompleta text, telefono character varying, correo character varying, celular character varying, otro character varying, tipo character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+	return query
+	with recuperar_clientesFisicos as (select cf.status from clientes_personas_fisicas cf)
+		select
+		c.codigo_cliente, 
+		cf.rfc,		
+		cf.nombre,
+		cf.apellido_paterno,
+		cf.apellido_materno,
+		concat(cf.nombre, ' ', cf.apellido_paterno, ' ', cf.apellido_materno) as nombreCompleto,
+		c.pais,
+		c.estado,
+		c.municipio,
+		c.calle,
+		c.n_exterior,
+		c.n_interior,
+		c.colonia,
+		c.localidad,
+		c.codigo_postal,
+		concat(c.pais, ' ', c.estado, ' ', c.municipio, ' ', c.calle, ' ',c.n_exterior, '-',c.n_interior, ' ', c.colonia, ' ', c.codigo_postal) as direccionCompleta,
+		c.telefono,
+		c.correo,
+		c.celular,
+		c.otro,
+		c.tipo
+		from clientes c inner join clientes_personas_fisicas cf on c.codigo_cliente = cf.codigo_cliente
+		where cf.status = TRUE;
+end	
+$$;
+
+
+ALTER FUNCTION public.recuperar_clientesfisicos() OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1255 OID 33794)
+-- Name: recuperar_clientesmorales(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION recuperar_clientesmorales() RETURNS TABLE(codigomoral smallint, rfc character varying, empresa character varying, nombre character varying, apaterno character varying, amaterno character varying, telefonocontacto character varying, correocontacto character varying, pais character varying, estado character varying, municipio character varying, calle character varying, nexterior character varying, ninterior character varying, colonia character varying, localidad character varying, codpostal integer, direccioncompleta text, telefono character varying, correo character varying, celular character varying, otro character varying, tipo character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+	return query
+	with recuperar_clientesMorales as (select cm.status from clientes_personas_morales cm)
+		select
+		c.codigo_cliente,
+		cm.rfc,
+		cm.empresa,
+		cm.nombre,
+		cm.apellido_paterno,
+		cm.apellido_materno,
+		cm.telefono,
+		cm.correo,
+		c.pais,
+		c.estado,
+		c.municipio,
+		c.calle,
+		c.n_exterior,
+		c.n_interior,
+		c.colonia,
+		c.localidad,
+		c.codigo_postal,
+		concat(c.pais, ' ', c.estado, ' ', c.municipio, ' ', c.calle, ' ',c.n_exterior, '-',c.n_interior, ' ', c.colonia, ' ', c.codigo_postal) as direccionCompleta,
+		c.telefono,		
+		c.correo,
+		c.celular,
+		c.otro,
+		c.tipo
+		from clientes c inner join clientes_personas_morales cm on c.codigo_cliente = cm.codigo_cliente
+		where cm.status = TRUE;
+end	
+$$;
+
+
+ALTER FUNCTION public.recuperar_clientesmorales() OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1255 OID 33792)
+-- Name: recuperar_usuarios(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION recuperar_usuarios() RETURNS TABLE(codigo_usuario smallint, usuario character varying, contrasenia character varying, tipo character varying, nombre character varying, completo text, apellido_paterno character varying, apellido_materno character varying, direccion character varying, telefono character varying, celular character varying, correo character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+	return query
+		with recuperar_usuarios as
+		(select u.status from usuarios u )
+		
+		select 
+		 usuarios.codigo_usuario,
+		 usuarios.usuario, 
+		 usuarios.contrasenia, 
+		 usuarios.tipo,
+		 usuarios.nombre, 
+		 concat(usuarios.nombre, ' ', usuarios.apellido_paterno, ' ', usuarios.apellido_materno) as completo, 
+		 usuarios.apellido_paterno,
+		 usuarios.apellido_materno, 
+		 usuarios.direccion, 
+		 usuarios.telefono,
+		 usuarios.celular, 
+		 usuarios.correo 
+		from usuarios where usuarios.status = TRUE;
+		
+		end
+		$$;
+
+
+ALTER FUNCTION public.recuperar_usuarios() OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1255 OID 33791)
+-- Name: recuperar_valores(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION recuperar_valores() RETURNS TABLE(codigo_proveedor smallint, nombre character varying, pais character varying, estado character varying, municipio character varying, calle character varying, n_exterior character varying, n_interior character varying, colonia character varying, localidad character varying, codigo_postal integer, correo character varying, telefono character varying, celular character varying, otro character varying, c_nombre character varying, c_apellido_paterno character varying, c_apellido_materno character varying, c_direccion character varying, c_telefono character varying, c_correo character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+	return query
+		with proveedor_y_contactos as
+		(select status as statuss from contactos_proveedores)
+		
+		select  proveedores.codigo_proveedor,proveedores.nombre, proveedores.pais,proveedores.estado,proveedores.municipio,
+		proveedores.calle,proveedores.n_exterior,proveedores.n_interior,proveedores.colonia,proveedores.localidad,
+		proveedores.codigo_postal,proveedores.correo,proveedores.telefono,proveedores.celular,proveedores.otro ,
+		contactos_proveedores.nombre as c_nombre,contactos_proveedores.apellido_paterno as c_apellido_paterno,
+		contactos_proveedores.apellido_materno as c_apellido_materno,contactos_proveedores.direccion as c_direccion,
+		contactos_proveedores.telefono as c_telefono,contactos_proveedores.correo as c_correo 
+		from proveedores inner join 
+		contactos_proveedores on proveedores.codigo_proveedor = contactos_proveedores.codigo_proveedor where proveedores.status
+		= TRUE and contactos_proveedores.status = TRUE ;
+		end
+		$$;
+
+
+ALTER FUNCTION public.recuperar_valores() OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 180 (class 1259 OID 33612)
+-- Name: categorias_de_productos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE categorias_de_productos (
+    id_categoria_producto smallint NOT NULL,
+    categoria character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT categorias_de_productos_categoria_check CHECK ((length(ltrim(rtrim((categoria)::text))) > 3)),
+    CONSTRAINT categorias_de_productos_id_categoria_producto_check CHECK ((id_categoria_producto > 0))
+);
+
+
+ALTER TABLE public.categorias_de_productos OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 33522)
+-- Name: clientes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE clientes (
+    codigo_cliente smallint NOT NULL,
+    pais character varying NOT NULL,
+    estado character varying NOT NULL,
+    municipio character varying NOT NULL,
+    calle character varying NOT NULL,
+    n_exterior character varying DEFAULT 'S/N'::character varying,
+    n_interior character varying DEFAULT 'S/N'::character varying,
+    colonia character varying NOT NULL,
+    localidad character varying NOT NULL,
+    codigo_postal integer NOT NULL,
+    correo character varying NOT NULL,
+    telefono character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    celular character varying DEFAULT '000-000-000-00-00'::character varying NOT NULL,
+    otro character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    tipo character varying NOT NULL,
+    CONSTRAINT clientes_calle_check CHECK ((length(ltrim(rtrim((calle)::text))) > 0)),
+    CONSTRAINT clientes_codigo_cliente_check CHECK ((codigo_cliente > 0)),
+    CONSTRAINT clientes_colonia_check CHECK ((length(ltrim(rtrim((colonia)::text))) > 3)),
+    CONSTRAINT clientes_correo_check CHECK ((length(ltrim(rtrim((correo)::text))) > 3)),
+    CONSTRAINT clientes_correo_check1 CHECK (((correo)::text ~~ '%@%'::text)),
+    CONSTRAINT clientes_estado_check CHECK (((estado)::text = ANY ((ARRAY['Aguascalientes'::character varying, 'Baja california norte'::character varying, 'Baja california sur'::character varying, 'Campeche'::character varying, 'Coahuila'::character varying, 'Chiapas'::character varying, 'Chihuahua'::character varying, 'Durango'::character varying, 'Mexico df'::character varying, 'Guanajuato'::character varying, 'Guerrero'::character varying, 'Hidalgo'::character varying, 'Jalisco'::character varying, 'Michoacan'::character varying, 'Morelos'::character varying, 'Mexico,df'::character varying, 'Nayarit'::character varying, 'Nuevo leon'::character varying, 'Oaxaca'::character varying, 'Puebla'::character varying, 'Queretaro'::character varying, 'Quintana roo'::character varying, 'San luis potosi'::character varying, 'Sinaloa'::character varying, 'Sonora'::character varying, 'Tabasco'::character varying, 'Tamaulipas'::character varying, 'Tlaxcala'::character varying, 'Veracruz'::character varying, 'Yucatan'::character varying, 'Zacatecas'::character varying])::text[]))),
+    CONSTRAINT clientes_localidad_check CHECK ((length(ltrim(rtrim((localidad)::text))) > 3)),
+    CONSTRAINT clientes_municipio_check CHECK ((length(ltrim(rtrim((municipio)::text))) > 3)),
+    CONSTRAINT clientes_pais_check CHECK ((length(ltrim(rtrim((pais)::text))) > 3))
+);
+
+
+ALTER TABLE public.clientes OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 33549)
+-- Name: clientes_personas_fisicas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE clientes_personas_fisicas (
+    id_cliente_fisico smallint NOT NULL,
+    codigo_cliente smallint NOT NULL,
+    rfc character varying NOT NULL,
+    nombre character varying NOT NULL,
+    apellido_paterno character varying NOT NULL,
+    apellido_materno character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT clientes_personas_fisicas_apellido_materno_check CHECK ((length(ltrim(rtrim((apellido_materno)::text))) > 3)),
+    CONSTRAINT clientes_personas_fisicas_apellido_paterno_check CHECK ((length(ltrim(rtrim((apellido_paterno)::text))) > 3)),
+    CONSTRAINT clientes_personas_fisicas_id_cliente_fisico_check CHECK ((id_cliente_fisico > 0)),
+    CONSTRAINT clientes_personas_fisicas_nombre_check CHECK ((length(ltrim(rtrim((nombre)::text))) > 2)),
+    CONSTRAINT clientes_personas_fisicas_rfc_check CHECK ((length(ltrim(rtrim((rfc)::text))) = 13))
+);
+
+
+ALTER TABLE public.clientes_personas_fisicas OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 33537)
+-- Name: clientes_personas_morales; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE clientes_personas_morales (
+    id_cliente_moral smallint NOT NULL,
+    codigo_cliente smallint NOT NULL,
+    rfc character varying NOT NULL,
+    empresa character varying NOT NULL,
+    nombre character varying NOT NULL,
+    apellido_paterno character varying NOT NULL,
+    apellido_materno character varying NOT NULL,
+    telefono character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    correo character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT clientes_personas_morales_apellido_materno_check CHECK ((length(ltrim(rtrim((apellido_materno)::text))) > 3)),
+    CONSTRAINT clientes_personas_morales_apellido_paterno_check CHECK ((length(ltrim(rtrim((apellido_paterno)::text))) > 3)),
+    CONSTRAINT clientes_personas_morales_correo_check CHECK ((length(ltrim(rtrim((correo)::text))) > 3)),
+    CONSTRAINT clientes_personas_morales_correo_check1 CHECK (((correo)::text ~~ '%@%'::text)),
+    CONSTRAINT clientes_personas_morales_empresa_check CHECK ((length(ltrim(rtrim((empresa)::text))) > 3)),
+    CONSTRAINT clientes_personas_morales_id_cliente_moral_check CHECK ((id_cliente_moral > 0)),
+    CONSTRAINT clientes_personas_morales_nombre_check CHECK ((length(ltrim(rtrim((nombre)::text))) >= 0)),
+    CONSTRAINT clientes_personas_morales_rfc_check CHECK ((length(ltrim(rtrim((rfc)::text))) = 12)),
+    CONSTRAINT clientes_personas_morales_telefono_check CHECK ((length(ltrim(rtrim((telefono)::text))) > 3))
+);
+
+
+ALTER TABLE public.clientes_personas_morales OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 33574)
+-- Name: compras; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE compras (
+    folio integer NOT NULL,
+    codigo_proveedor smallint NOT NULL,
+    fecha_y_hora timestamp with time zone NOT NULL,
+    CONSTRAINT compras_folio_check CHECK ((folio > 0))
+);
+
+
+ALTER TABLE public.compras OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 33572)
+-- Name: compras_folio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE compras_folio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.compras_folio_seq OWNER TO postgres;
+
+--
+-- TOC entry 2183 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: compras_folio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE compras_folio_seq OWNED BY compras.folio;
+
+
+--
+-- TOC entry 178 (class 1259 OID 33588)
+-- Name: contactos_proveedores; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE contactos_proveedores (
+    id_contacto smallint NOT NULL,
+    codigo_proveedor smallint NOT NULL,
+    nombre character varying NOT NULL,
+    apellido_paterno character varying NOT NULL,
+    apellido_materno character varying NOT NULL,
+    direccion character varying NOT NULL,
+    telefono character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    correo character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT contactos_proveedores_apellido_materno_check CHECK ((length(ltrim(rtrim((apellido_materno)::text))) > 3)),
+    CONSTRAINT contactos_proveedores_apellido_paterno_check CHECK ((length(ltrim(rtrim((apellido_paterno)::text))) > 3)),
+    CONSTRAINT contactos_proveedores_correo_check CHECK ((length(ltrim(rtrim((correo)::text))) > 3)),
+    CONSTRAINT contactos_proveedores_correo_check1 CHECK (((correo)::text ~~ '%@%'::text)),
+    CONSTRAINT contactos_proveedores_direccion_check CHECK ((length(ltrim(rtrim((direccion)::text))) > 3)),
+    CONSTRAINT contactos_proveedores_id_contacto_check CHECK ((id_contacto > 0)),
+    CONSTRAINT contactos_proveedores_nombre_check CHECK ((length(ltrim(rtrim((nombre)::text))) > 2))
+);
+
+
+ALTER TABLE public.contactos_proveedores OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 33582)
+-- Name: detalles_de_compras; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE detalles_de_compras (
+    codigo_compra integer NOT NULL,
+    folio integer NOT NULL,
+    codigo_producto smallint NOT NULL,
+    cantidad double precision NOT NULL,
+    costo_unitario numeric(8,2) NOT NULL,
+    porcentaje_precio numeric(8,2) NOT NULL,
+    iva_unitario numeric(8,2) NOT NULL,
+    CONSTRAINT detalles_de_compras_cantidad_check CHECK ((cantidad > (0)::double precision)),
+    CONSTRAINT detalles_de_compras_codigo_compra_check CHECK ((codigo_compra > 0))
+);
+
+
+ALTER TABLE public.detalles_de_compras OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 33580)
+-- Name: detalles_de_compras_codigo_compra_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE detalles_de_compras_codigo_compra_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.detalles_de_compras_codigo_compra_seq OWNER TO postgres;
+
+--
+-- TOC entry 2184 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: detalles_de_compras_codigo_compra_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE detalles_de_compras_codigo_compra_seq OWNED BY detalles_de_compras.codigo_compra;
+
+
+--
+-- TOC entry 184 (class 1259 OID 33631)
+-- Name: detalles_de_ventas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE detalles_de_ventas (
+    codigo_detalle integer NOT NULL,
+    folio integer NOT NULL,
+    codigo_producto smallint NOT NULL,
+    cantidad double precision NOT NULL,
+    precio_unitario numeric(8,2) NOT NULL,
+    iva_unitario numeric(8,2) NOT NULL,
+    CONSTRAINT detalles_de_ventas_cantidad_check CHECK ((cantidad > (0)::double precision)),
+    CONSTRAINT detalles_de_ventas_codigo_detalle_check CHECK ((codigo_detalle > 0))
+);
+
+
+ALTER TABLE public.detalles_de_ventas OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 33629)
+-- Name: detalles_de_ventas_codigo_detalle_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE detalles_de_ventas_codigo_detalle_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.detalles_de_ventas_codigo_detalle_seq OWNER TO postgres;
+
+--
+-- TOC entry 2185 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: detalles_de_ventas_codigo_detalle_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE detalles_de_ventas_codigo_detalle_seq OWNED BY detalles_de_ventas.codigo_detalle;
+
+
+--
+-- TOC entry 179 (class 1259 OID 33600)
+-- Name: productos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE productos (
+    codigo_producto smallint NOT NULL,
+    id_categoria_producto smallint NOT NULL,
+    clave character varying NOT NULL,
+    unidad_medida character varying NOT NULL,
+    descripcion character varying NOT NULL,
+    precio1 numeric(8,2) NOT NULL,
+    precio2 numeric(8,2) NOT NULL,
+    porciento_iva numeric(8,2) NOT NULL,
+    existencia_actual double precision NOT NULL,
+    existencia_maxima double precision NOT NULL,
+    existencia_minima double precision NOT NULL,
+    causa character varying DEFAULT 'N/A'::character varying,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT productos_check CHECK ((precio1 > precio2)),
+    CONSTRAINT productos_check1 CHECK ((existencia_maxima > existencia_minima)),
+    CONSTRAINT productos_check2 CHECK ((existencia_actual < existencia_maxima)),
+    CONSTRAINT productos_check3 CHECK ((existencia_actual > existencia_minima)),
+    CONSTRAINT productos_codigo_producto_check CHECK ((codigo_producto > 0)),
+    CONSTRAINT productos_descripcion_check CHECK ((length(ltrim(rtrim((descripcion)::text))) > 3)),
+    CONSTRAINT productos_existencia_actual_check CHECK ((existencia_actual > (0)::double precision)),
+    CONSTRAINT productos_existencia_maxima_check CHECK ((existencia_maxima > (0)::double precision)),
+    CONSTRAINT productos_existencia_minima_check CHECK ((existencia_minima > (0)::double precision)),
+    CONSTRAINT productos_unidad_medida_check CHECK ((length(ltrim(rtrim((unidad_medida)::text))) > 0))
+);
+
+
+ALTER TABLE public.productos OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 33558)
+-- Name: proveedores; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE proveedores (
+    codigo_proveedor smallint NOT NULL,
+    nombre character varying NOT NULL,
+    pais character varying NOT NULL,
+    estado character varying NOT NULL,
+    municipio character varying NOT NULL,
+    calle character varying NOT NULL,
+    n_exterior character varying DEFAULT 'S/N'::character varying,
+    n_interior character varying DEFAULT 'S/N'::character varying,
+    colonia character varying NOT NULL,
+    localidad character varying NOT NULL,
+    codigo_postal integer NOT NULL,
+    correo character varying NOT NULL,
+    telefono character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    celular character varying DEFAULT '000-000-000-00-00'::character varying NOT NULL,
+    otro character varying DEFAULT '000-000-000-00-00'::character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT proveedores_calle_check CHECK ((length(ltrim(rtrim((calle)::text))) > 3)),
+    CONSTRAINT proveedores_codigo_proveedor_check CHECK ((codigo_proveedor > 0)),
+    CONSTRAINT proveedores_colonia_check CHECK ((length(ltrim(rtrim((colonia)::text))) > 3)),
+    CONSTRAINT proveedores_correo_check CHECK ((length(ltrim(rtrim((correo)::text))) > 3)),
+    CONSTRAINT proveedores_correo_check1 CHECK (((correo)::text ~~ '%@%'::text)),
+    CONSTRAINT proveedores_estado_check CHECK (((estado)::text = ANY ((ARRAY['Aguascalientes'::character varying, 'Baja california norte'::character varying, 'Baja california sur'::character varying, 'Campeche'::character varying, 'Coahula'::character varying, 'Chiapas'::character varying, 'Chihuahua'::character varying, 'Durango'::character varying, 'Mexico df'::character varying, 'Guanajuato'::character varying, 'Guerrero'::character varying, 'Hidalgo'::character varying, 'Jalisco'::character varying, 'Michoacan'::character varying, 'Morelos'::character varying, 'Mexico,df'::character varying, 'Nayarit'::character varying, 'Nuevo leon'::character varying, 'Oaxaca'::character varying, 'Puebla'::character varying, 'Queretaro'::character varying, 'Quintana roo'::character varying, 'San luis potosi'::character varying, 'Sinaloa'::character varying, 'Sonora'::character varying, 'Tabasco'::character varying, 'Tamaulipas'::character varying, 'Tlaxcala'::character varying, 'Veracruz'::character varying, 'Yucatan'::character varying, 'Zacatecas'::character varying])::text[]))),
+    CONSTRAINT proveedores_localidad_check CHECK ((length(ltrim(rtrim((localidad)::text))) > 3)),
+    CONSTRAINT proveedores_municipio_check CHECK ((length(ltrim(rtrim((municipio)::text))) > 3)),
+    CONSTRAINT proveedores_nombre_check CHECK ((length(ltrim(rtrim((nombre)::text))) > 3)),
+    CONSTRAINT proveedores_pais_check CHECK ((length(ltrim(rtrim((pais)::text))) > 3))
+);
+
+
+ALTER TABLE public.proveedores OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 33637)
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuarios (
+    codigo_usuario smallint NOT NULL,
+    usuario character varying NOT NULL,
+    contrasenia character varying NOT NULL,
+    tipo character varying NOT NULL,
+    nombre character varying NOT NULL,
+    apellido_paterno character varying NOT NULL,
+    apellido_materno character varying NOT NULL,
+    direccion character varying NOT NULL,
+    telefono character varying DEFAULT '00-000-00-000-00'::character varying NOT NULL,
+    celular character varying DEFAULT '000-000-000-00-00'::character varying NOT NULL,
+    correo character varying NOT NULL,
+    status boolean DEFAULT true NOT NULL,
+    CONSTRAINT usuarios_apellido_materno_check CHECK ((length(ltrim(rtrim((apellido_materno)::text))) > 3)),
+    CONSTRAINT usuarios_apellido_paterno_check CHECK ((length(ltrim(rtrim((apellido_paterno)::text))) > 3)),
+    CONSTRAINT usuarios_codigo_usuario_check CHECK ((codigo_usuario > 0)),
+    CONSTRAINT usuarios_contrasenia_check CHECK ((length(ltrim(rtrim((contrasenia)::text))) > 3)),
+    CONSTRAINT usuarios_correo_check CHECK ((length(ltrim(rtrim((correo)::text))) > 3)),
+    CONSTRAINT usuarios_correo_check1 CHECK (((correo)::text ~~ '%@%'::text)),
+    CONSTRAINT usuarios_direccion_check CHECK ((length(ltrim(rtrim((direccion)::text))) > 3)),
+    CONSTRAINT usuarios_nombre_check CHECK ((length(ltrim(rtrim((nombre)::text))) > 2)),
+    CONSTRAINT usuarios_tipo_check CHECK ((length(ltrim(rtrim((tipo)::text))) > 3)),
+    CONSTRAINT usuarios_usuario_check CHECK ((length(ltrim(rtrim((usuario)::text))) > 3))
+);
+
+
+ALTER TABLE public.usuarios OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 33623)
+-- Name: ventas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ventas (
+    folio integer NOT NULL,
+    codigo_cliente smallint NOT NULL,
+    codigo_usuario smallint NOT NULL,
+    fecha_y_hora timestamp with time zone NOT NULL,
+    CONSTRAINT ventas_folio_check CHECK ((folio > 0))
+);
+
+
+ALTER TABLE public.ventas OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 33621)
+-- Name: ventas_folio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ventas_folio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ventas_folio_seq OWNER TO postgres;
+
+--
+-- TOC entry 2186 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ventas_folio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ventas_folio_seq OWNED BY ventas.folio;
+
+
+--
+-- TOC entry 186 (class 1259 OID 33806)
+-- Name: vwproductos; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW vwproductos AS
+ SELECT p.codigo_producto,
+    cp.id_categoria_producto,
+    cp.categoria,
+    p.clave,
+    p.unidad_medida,
+    p.descripcion,
+    p.precio1,
+    p.precio2,
+    p.porciento_iva,
+    p.existencia_actual,
+    p.existencia_maxima,
+    p.existencia_minima,
+    p.causa,
+    p.status
+   FROM (productos p
+     JOIN categorias_de_productos cp ON ((p.id_categoria_producto = cp.id_categoria_producto)));
+
+
+ALTER TABLE public.vwproductos OWNER TO postgres;
+
+--
+-- TOC entry 1958 (class 2604 OID 33577)
+-- Name: folio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY compras ALTER COLUMN folio SET DEFAULT nextval('compras_folio_seq'::regclass);
+
+
+--
+-- TOC entry 1960 (class 2604 OID 33585)
+-- Name: codigo_compra; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_compras ALTER COLUMN codigo_compra SET DEFAULT nextval('detalles_de_compras_codigo_compra_seq'::regclass);
+
+
+--
+-- TOC entry 1989 (class 2604 OID 33634)
+-- Name: codigo_detalle; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_ventas ALTER COLUMN codigo_detalle SET DEFAULT nextval('detalles_de_ventas_codigo_detalle_seq'::regclass);
+
+
+--
+-- TOC entry 1987 (class 2604 OID 33626)
+-- Name: folio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ventas ALTER COLUMN folio SET DEFAULT nextval('ventas_folio_seq'::regclass);
+
+
+--
+-- TOC entry 2169 (class 0 OID 33612)
+-- Dependencies: 180
+-- Data for Name: categorias_de_productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY categorias_de_productos (id_categoria_producto, categoria, status) FROM stdin;
+1	Secretarial	t
+2	Escolar	t
+3	Industrial	t
+4	Bordados	t
+5	Deportivo	t
+\.
+
+
+--
+-- TOC entry 2159 (class 0 OID 33522)
+-- Dependencies: 170
+-- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY clientes (codigo_cliente, pais, estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro, tipo) FROM stdin;
+1	México	Veracruz	Minatitlan	10	2456	S/N	Petrolera	Minatitlan	96852	Centro@hotmail.com	4589666	000-000-000-00-00	00-000-00-000-00	Fisico
+2	México	Mexico df	Ecatepec	Lago peten	8	S/N	Jardines de morelos	Seccion Rios	55070	DominguezSir@hotmail.com	55546446	000-000-000-00-00	00-000-00-000-00	Moral
+3	México	Aguascalientes	apatziingan	48	12	S/N	desconocida	la arena	94655	imagina_adcb@hotmail.com	4497697538	000-000-000-00-00	00-000-00-000-00	Fisico
+4	México	Quintana roo	Cozumel	zaragoza	47	S/N	Becerril	Tulum	48795	Ricardo@hotmail.com	4784855646	000-000-000-00-00	00-000-00-000-00	Moral
+5	México	Veracruz	Tejeria	Avenida Acacias	lote 1	Int pino	Industrial	Tejeria	96852	Arseya_ADCV@hotmail.com	2292364566	000-000-000-00-00	00-000-00-000-00	Fisico
+6	México	Puebla	Juarez la paz	31 poniente	3321	S/N	Las animas	Animas noria	77200	Colegio@hotmail.com	781257896	000-000-000-00-00	00-000-00-000-00	Moral
+7	México	Puebla	Ampliacion reforma	29 poniente	4513	S/N	Animas	Noria	42178	crayola@hotmail.com	454778455	000-000-000-00-00	00-000-00-000-00	Fisico
+8	México	Puebla	Coyotepec	4s	45	S/N	Tepexco	Tepexco	85463	Daniel@hotmail.com	478446545	000-000-000-00-00	00-000-00-000-00	Moral
+9	México	Veracruz	Fortin de las Flores	San Lazaro	19	S/N	Santa Leticia	Fortin de las Flores	94470	cfd@dampf.com	7163384	000-000-000-00-00	00-000-00-000-00	Fisico
+10	México	Veracruz	Cordoba	22	30	S/N	Centro	Cordoba	52255	Hector_ERESGO@hotmail.com	71256223	000-000-000-00-00	00-000-00-000-00	Moral
+11	México	Puebla	Bella Vista	20 sur	2539	S/N	Bella Vista	Bella Vista	72500	clinica@hotmail.com	222154589	000-000-000-00-00	00-000-00-000-00	Fisico
+12	México	Mexico df	Benito Juares	San juan	S/N	S/N	Tepecohulco	Tepecohulco	56970	emilianoZapata@gmail.com	12451223	000-000-000-00-00	00-000-00-000-00	Moral
+13	México	Veracruz	Cordoba	5	18	S/N	Leticia	Cordoba	49589	Quimicosy@hotmail.com	7180779	000-000-000-00-00	00-000-00-000-00	Fisico
+14	México	Puebla	Calzada Morelos	12	84	45	La Garza	Los angeles	46565	erika@hotmail.com	4787997	000-000-000-00-00	00-000-00-000-00	Moral
+15	México	Veracruz	Cordoba	12 y 14	2456	S/N	Lomas Verdes	Cordoba	94585	fundacion@hotmail.com	00-000-00-000-00	2714846925	00-000-00-000-00	Fisico
+16	México	Mexico df	Ecatepec	Morelos	35	S/N	San Jose	Jajalpa	55090	GrupoCebva@hotmail.com	00-000-00-000-00	000-000-000-00-00	555464886446	Moral
+17	México	Veracruz	Cordoba	23	45	S/N	Lomas Altas	Cordoba	97584	Lomasajeas@hotmail.com	00-000-00-000-00	2716498469	00-000-00-000-00	Fisico
+18	México	Mexico df	Ecatepec	Francisco Villa	108	S/N	San Carlos	San Carlos	55080	ColegioBa@hotmail.com	00-000-00-000-00	000-000-000-00-00	55454585456	Moral
+19	México	Puebla	Zautla	Cuatlacingo	45	S/N	Cuatlacingo	desconocida	46897	Nosta@hotmail.com	00-000-00-000-00	2457966333	00-000-00-000-00	Fisico
+20	México	Veracruz	Cordoba	5	516	S/N	Del Carmen	Cordoba	94580	Francisco@hotmail.com	00-000-00-000-00	2711206217	00-000-00-000-00	Moral
+21	México	Veracruz	Cordoba	30	200	S/N	Centro	Cordoba	18844	Mextiltex@gmail.com	71429391	000-000-000-00-00	00-000-00-000-00	Fisico
+22	México	Veracruz	Cordoba	33	2015	S/N	Girasol	Cordoba	74575	machuca@hotmail.com	7180779	000-000-000-00-00	00-000-00-000-00	Moral
+23	México	Veracruz	Orizaba	Gardenias	22	S/N	Las Flores	Orizaba	94563	rene_1@hotmail.com	00-000-00-000-00	2711393884	00-000-00-000-00	Fisico
+24	México	Veracruz	Cordoba	20 y 22	30	S/N	Girasol	Cordoba	94575	kinser07@gmail.com	00-000-00-000-00	2711393883	00-000-00-000-00	Moral
+25	México	Mexico df	La Corregidora 36	atlauta	36	b	fictisio	Atlautla	56970	primariaNervo@hotmail.com	00-000-00-000-00	0125589666	00-000-00-000-00	Fisico
+26	México	Puebla	Valle del rey	privada 41	602	A norte	fuentes	fuentes	46899	Uniforliu@hotmail.com	00-000-00-000-00	222315565	00-000-00-000-00	Moral
+27	México	Veracruz	San Andres Tuxtla	Mangana	1	S/N	Franccionameinto el rodeo	San Andres Tuxtla	95765	emilianoZapataa@gmail.com	12451223	000-000-000-00-00	00-000-00-000-00	Fisico
+28	México	Veracruz	Boca del Rio	Invernadero	117	1A	Franccionameinto Jardines	Boca del rio	94294	Jrolon@yahoo.com	00-000-00-000-00	2292356646	00-000-00-000-00	Moral
+29	México	Veracruz	Cordoba	laureles	S/N	2B	Centro	Cordoba	58469	Recubrimientos@gmail.com	54961819	000-000-000-00-00	00-000-00-000-00	Fisico
+30	México	Veracruz	Veracruz	Montesinos	1	S/N	Centro	Veracruz	91700	Hgomex@ferrosur.com	229334666	000-000-000-00-00	00-000-00-000-00	Moral
+31	México	Puebla	Chapulco	32	1024	S/N	San Antonio calzada	San Antonio calzada	48979	Gloria@hotmail.com	4887999995	000-000-000-00-00	00-000-00-000-00	Fisico
+32	México	Veracruz	Minatitlan	Predio Encino Gordo	S/N	S/N	Acceso a la autopista	Minatitlan	96340	SecBeliciario2@hotmail.com	555642315	000-000-000-00-00	00-000-00-000-00	Moral
+33	México	Veracruz	Cordoba	9	30	S/N	Fraccionamiento Alameda	Cordoba	94580	suitesLayfer@gmail.com	7125884	000-000-000-00-00	00-000-00-000-00	Fisico
+34	México	Durango	Gomes Palacios	durango	45	S/N	desconocida	Duraznito	75463	durazno@hotmail.com	00-000-00-000-00	278452363	00-000-00-000-00	Moral
+35	México	Veracruz	Cordoba	22	3	S/N	Girasol	Cordoba	94575	evan_alexis@hotmail.com	00-000-00-000-00	27152536896	00-000-00-000-00	Fisico
+\.
+
+
+--
+-- TOC entry 2161 (class 0 OID 33549)
+-- Dependencies: 172
+-- Data for Name: clientes_personas_fisicas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY clientes_personas_fisicas (id_cliente_fisico, codigo_cliente, rfc, nombre, apellido_paterno, apellido_materno, status) FROM stdin;
+1	1	AUSL750616AX1	Luis	Aguila	Sanchez	t
+2	3	VALA900606GRA	Alberto	Vasquez	Leon	t
+3	5	OOGA740517C72	Ana	Osorio	Gutierrez	t
+4	7	RUDL70120852A	Ruth	Dinora	Lascano	t
+5	9	GOCL900719RQ3	Gonzalo	Castro	Lopez	t
+6	11	SAJN800315M56	Nayeli	Sanchez	Jimenez	t
+\.
+
+
+--
+-- TOC entry 2160 (class 0 OID 33537)
+-- Dependencies: 171
+-- Data for Name: clientes_personas_morales; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY clientes_personas_morales (id_cliente_moral, codigo_cliente, rfc, empresa, nombre, apellido_paterno, apellido_materno, telefono, correo, status) FROM stdin;
+1	2	PASR9112184N	Sigma	Gerardo	Flores	Malpica	7187634	gerardo@hotmail.com	t
+2	4	ASI740906AM6	Informatica SA de CV	Roberto	Calvo	Segura	7146677	rober@gmail.com	t
+3	6	BIO920817NW1	Biomep SA de CV	Laura	Avendaño	Rojas	7267856	bio@hotmail.com	t
+4	8	SBM970512KC7	Sport Bags Mexico SA de CV	Jose Luis	Vega	Lopez	7394312	vega@hotmail.com	t
+5	10	SMI971104KH7	Santy Mistic SA de CV	Sonia	Santos	Ramirez	7156734	sonia@hotmail.com	t
+\.
+
+
+--
+-- TOC entry 2164 (class 0 OID 33574)
+-- Dependencies: 175
+-- Data for Name: compras; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY compras (folio, codigo_proveedor, fecha_y_hora) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2187 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: compras_folio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('compras_folio_seq', 1, false);
+
+
+--
+-- TOC entry 2167 (class 0 OID 33588)
+-- Dependencies: 178
+-- Data for Name: contactos_proveedores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY contactos_proveedores (id_contacto, codigo_proveedor, nombre, apellido_paterno, apellido_materno, direccion, telefono, correo, status) FROM stdin;
+1	1	HECTOR	RENE	ESPINOZA	AV.33 calle 20 y 22	7180775	hector@hotmail.com	t
+2	2	GLORIA	MEZA	HERNANDEZ	AV 11 CALLE 14	2711082171	gloria100894@hotmail.com	t
+3	3	Gerardo	Hernandez	Laguna	av.8 calle 2 y 4	2711223656	Gerardo01@gmail.com	t
+4	4	Monica	Juarez	Luna	av.1 calle 20	2725648563	Monica_luna@gmail.com	t
+5	5	Eduardo	Morales	Lara	av.23 calle 19 y 21	2294569856	Eduardo_e@gmail.com	t
+6	6	Jose	Andrade	Buen dia	av.15 calle 1 y 2	229564815	Jose_An@gmail.com	t
+7	7	Ricardo	Pilares	Torres	av.16 calle 25	2212365456	Ricardo_pt@gmail.com	t
+8	8	David	Ramirez	Galero	av.8 calle 26	2711235648	David_rami@gmail.com	t
+9	9	Agustin	Fernandez	Reyes	av. 3 calle 6	2724565864	Agustin_fer@gmail.com	t
+10	10	Maria	Gutierrez	Mendoza	av.5 calle 8	2717563548	Maria_gu@gmail.com	t
+11	11	Lourdes	Gomez	Barojas	av.4 calle 14 y 15	2714568564	Lour_barojas@gmail.com	t
+12	12	Calixto	Silva	Calixto	av.1 calle 10	2714589745	Calixto_silva@gmail.com	t
+13	13	Fernando	Torio	Acevedo	av.21 calle 12	2724569854	FFer_fer@gmail.com	t
+14	14	Evan	Alexis	Meza	av.2 calle 33	2724561973	Evan_Alex@gmail.com	t
+15	15	Alejandro	Camerillo	Lozano	av.8 calle 8	2715648978	Alejandro_Ca@gmail.com	t
+16	16	Karla	Reyes	Gomez	av.4 calle 9 y 11	2712345789	Karla_reyes@gmail.com	t
+17	17	Susana	Gutierrez	Garmendi	av.18 calle 1 y 2	2712124598	SUSAN@gmail.com	t
+18	18	Adela	Meza	Hernandez	av.4 calle 7 y 9	2711245789	Adela_meza@gmail.com	t
+19	19	Ruben	Coria	Colon	av.6 calle 5	271254548	Ruben:Co@gmail.com	t
+20	20	Oscar	Mendia	Luna	av.4 calle 22	2712565893	Oscar_men@gmail.com	t
+21	21	Rosalia	Vasquez	Lopez	av.1 calle 1 y 2	2711245689	Rosalia_a@gmail.com	t
+22	22	Rosalva	Martinez	Gonzalez	av.5 calle 10 y 11	2712356481	Rosalva_mar@gmail.com	t
+23	23	Lorena	Castañeda	Curia	av.7 calle 12 y 21	2710215052	Lorena_Casta@gmail.com	t
+24	24	Guillermo	Mendel	Toscano	av.10 calle 1 y 2	2710286598	Memo_utvc@gmail.com	t
+25	25	Felipe	Lourdes	Mañanedo	av.11 calle 11 y 12	2715620148	Felipe_utvc@gmail.com	t
+26	26	Antonio	Reyes	Toscano	av.33 calle 30 y 31	2714562012	Antonio_Reyes@gmail.com	t
+27	27	Caliopa	Jimenez	Roman	av.3 calle  31	2710234585	Caliopa_@gmail.com	t
+28	28	Roxana	Pulido	Villa	av.14 calle 1	27145678520	Roxza@gmail.com	t
+29	29	Uriel	Lazaro	Zamudio	av.7 calle 01	1245687220	Uriel_de@gmail.com	t
+30	30	Gabriel	Gumaro	Lazo	av.4 calle 21	2725601580	Gabriel_guma@gmail.com	t
+31	31	Rocendo	Acevedo	Lazo	av.15 calle 11	2725230154	Rocendo_lazo@gmail.com	t
+\.
+
+
+--
+-- TOC entry 2166 (class 0 OID 33582)
+-- Dependencies: 177
+-- Data for Name: detalles_de_compras; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY detalles_de_compras (codigo_compra, folio, codigo_producto, cantidad, costo_unitario, porcentaje_precio, iva_unitario) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2188 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: detalles_de_compras_codigo_compra_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('detalles_de_compras_codigo_compra_seq', 1, false);
+
+
+--
+-- TOC entry 2173 (class 0 OID 33631)
+-- Dependencies: 184
+-- Data for Name: detalles_de_ventas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY detalles_de_ventas (codigo_detalle, folio, codigo_producto, cantidad, precio_unitario, iva_unitario) FROM stdin;
+1	1	3	10	30.00	4.80
+2	2	6	20	30.00	4.80
+3	3	8	50	30.00	4.80
+4	4	2	5	2000.00	320.00
+5	5	7	5	180.00	32.00
+6	6	3	5	30.00	4.80
+7	7	11	2	500.00	80.00
+8	8	18	50	30.00	4.80
+9	9	19	5	360.00	57.60
+10	10	5	4	200.00	32.00
+\.
+
+
+--
+-- TOC entry 2189 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: detalles_de_ventas_codigo_detalle_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('detalles_de_ventas_codigo_detalle_seq', 1, false);
+
+
+--
+-- TOC entry 2168 (class 0 OID 33600)
+-- Dependencies: 179
+-- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY productos (codigo_producto, id_categoria_producto, clave, unidad_medida, descripcion, precio1, precio2, porciento_iva, existencia_actual, existencia_maxima, existencia_minima, causa, status) FROM stdin;
+4	2	pl002	pza	Playera Escolar del diario Prim.Guadalupe Victoria 	180.00	170.00	28.80	15	100	1	N/A	t
+6	4	bo006	pza	Bordado de escuela Sec.ESBVN	30.00	15.00	4.80	2	10	1	N/A	t
+7	5	pa001	pza	Pants tipo Adidas	180.00	150.00	32.00	2	10	1	N/A	t
+10	1	tr001	pza	Traje de 3 piezas de dama	1200.00	1000.00	192.00	5	10	1	N/A	t
+12	2	co002	conjunto	Conjunto del diario 3 piezas Prim.Guadalupe Victoria	550.00	540.00	86.00	12	50	1	N/A	t
+13	2	co003	conjunto	Conjunto deportivo de 4 piezas Primaria Independencia	500.00	490.00	80.00	13	50	1	N/A	t
+15	5	pl001	pza	Playera Polo con 1 bordado	180.00	150.00	28.80	3	10	1	N/A	t
+16	1	ca001	pza	Camisa en tela Ambasador	180.00	160.00	208.80	10	30	1	N/A	t
+18	4	bo003	pza	Bordado de UTCV	30.00	15.00	4.80	2	10	1	N/A	t
+19	5	co004	conjunto	Playera y pants deportivo	360.00	320.00	57.60	5	15	1	N/A	t
+20	4	bo004	pza	Bordado de UPAV	30.00	15.00	4.80	2	10	1	N/A	t
+11	2	co001	conjunto	Conjunto deportivo de 4 piezas Primaria Guadalupe Victoria	500.00	490.00	80.00	8	50	1	N/A	t
+5	3	ca002	pza	Camisola en tela gabardina Borus	200.00	180.00	32.00	4	20	1	N/A	t
+2	1	tr002	conjunto	Traje de 3 piezas de caballero	2000.00	1500.00	320.00	7	20	1	se recupero	t
+3	4	bo007	pza	Bordado de escuela Prim.Independencia	30.00	15.00	4.80	7	10	1	se recupero	t
+17	1	bl001	pza	Blusa en tela Popelina	150.00	130.00	24.00	7	10	1	se recupero	t
+14	4	bo002	pza	Bordado de escuela Prim.Miguel Aleman	30.00	15.00	4.80	6	10	1	se recupero	t
+9	3	pa002	pza	Pantalon de gabardina	180.00	150.00	32.00	7	10	1	se compro en oferta	t
+21	4	bo005	pza	Bordado de escuela Prim.Guadalupe Victoria	30.00	15.00	4.80	7	10	1	se recupero	t
+8	4	bo001	pza	Bordado de escuela Prim.Chamizal	30.00	15.00	4.80	7	10	1	por que si	t
+\.
+
+
+--
+-- TOC entry 2162 (class 0 OID 33558)
+-- Dependencies: 173
+-- Data for Name: proveedores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY proveedores (codigo_proveedor, nombre, pais, estado, municipio, calle, n_exterior, n_interior, colonia, localidad, codigo_postal, correo, telefono, celular, otro, status) FROM stdin;
+1	TELAS TEXTILES	Mexico	Veracruz	Cordoba	madero	2415	sin numero	centro	cordoba	94567	Empresa@utcv.mx	7156362345	2715236356	2217536356	t
+2	Sueco Mex	Mexico	Puebla	Puebla	calle 23 Sur	2723	sin numero	centro	Puebla	72410	suecomex@gmail.com	0000000	2223256366	000000000	t
+3	Luperox	Mexico	Mexico df	Izhuatlan del sureste	kilometro 6.5	sin numero	sin numero	Estacion El chapo	Carretera nanchital	96660	GrupoCebva@hotmail.com	0000000	555464886446	000000000	t
+4	Permaducto	Mexico	Mexico df	Coatzacoalcos	Boulevar Adolfo lopez mateos	sin numero	sin numero	Villallende	Coatzacoalcos	96548	Correro@hotmail.com	0000000	555464886446	000000000	t
+5	Contro-B S.A de C.V	Mexico	Veracruz	Minatitlan	calle 10	Lote 4	sin numero	Petrolera	Minatitlan	96852	Centro@hotmail.com	4589666	0000000000	000000000	t
+6	Todo en telas	Mexico	Veracruz	Veracruz	avenida 20 de noviembre	sin numero	lote 50	Centro	Veracruz	91700	TTelas@telas.com	00000000	22931116	000000000	t
+7	Industrial Graphics	Mexico	Veracruz	Cordoba	Avenida 1	17007	sin numero	Centro	Cordoba	94500	Grahipsc@hotmail.com	7124536	00000000	000000000	t
+8	Hilos timon	Mexico	Veracruz	Orizaba	av.cidosa	9564	sin numero	Villas del carmen	Orizaba	94390	TimonHilos@hotmail.com	00000000	272134569	000000000	t
+9	Textiles Karan	Mexico	Veracruz	Coatzacoalcos	Bella Vista	509	sin numero	Centro	Coatzacoalcos	96400	KaranTextil@hotmail.com	229365635	0000000	000000000	t
+10	Textil la Lionesa	Mexico	Puebla	Puebla	12 Oriente	2227	sin numero	Los remedios	Puebla	72300	Lionesa@hotmail.com	22225233	0000000	000000000	t
+11	Polanco decoraciones	Mexico	Veracruz	Boca del rio	Plaza mocambo	111	B566	Jardines de Virginia	Boca del rio	94294	Decoraciones@hotmail.com	229366563	0000000	000000000	t
+12	Hilos timon	Mexico	Veracruz	Orizaba	cidosa	sin numero	1245	Villas del carmen	Orizaba	94390	TimonHilos@hotmail.com	22225233	272134569	000000000	t
+13	Textiles Karan	Mexico	Veracruz	Coatzacoalcos	Bella Vista	509	sin numero	Centro	Coatzacoalcos	96400	KaranTextil@hotmail.com	00000000	229365635	000000000	t
+14	Textil la Lionesa	Mexico	Puebla	Puebla	12 Oriente	2227	sin numero	Los remedios	Puebla	72300	Lionesa@hotmail.com	00000000	22225233	000000000	t
+15	Confeeciones y lavado del sureste	Mexico	Puebla	Puebla	Rafael Avila Camacho	29	sin numero	Centro	Ajalpan	72656	Confecciones@hotmail.com	222563336	00000000	000000000	t
+16	Textiles Avante	Mexico	Veracruz	Cosamaloapan	Avenida Adolfo Ruiz	203	sin numero	Centro	Cosomaloapan	95400	Textiles@gmail.com	22931333	00000000	000000000	t
+17	Mansil Textil	Mexico	Puebla	San Lorenzo Teotipilco	Josefa ortiz de Dominguez	532	sin numero	San Lorenzo Teotipilco	San lorenzo Teotipilco	75855	MansilTextil@hotmail.com	2382566666	00000000	000000000	t
+18	La bampant	Mexico	Puebla	San Lorenzo Teotipilco	Carretera Federal T-P	208	sin numero	San Lorenzo Teotipilco	San lorenzo Teotipilco	75855	Bmapant@hotmail.com	58665564	00000000	000000000	t
+19	Hilos y especialidades Pegasus	Mexico	Puebla	Tehuacan	Avenida reforma	sin numero	903	Centro	Tehuacan	75700	Hilos@hotmail.com	22533663	00000000	000000000	t
+20	Concorsio Mandez	Mexico	Veracruz	Rio Blanco	avenida Placido Mata	sin numero	0007	Salvador Gonzalez	Rio Blanco	94730	Consorcio@gmail.com	2721457863	00000000	000000000	t
+21	Grupo Tetil 2000	Mexico	Veracruz	Veracruz	Mario Molina	sin numero	975	Centro	Veracruz	91700	Textiles@hotmail.com	2293134663	00000000	000000000	t
+22	Modatelas	Mexico	Veracruz	Cordoba	Avenida 1	sin numero	508	Centro	Cordoba	94500	Modatelas@hotmail.com	271346696	00000000	000000000	t
+23	Tex Textiles	Mexico	Veracruz	Cordoba	Av. 3	0044	0012	Centro	Cordoba	94500	Textiles_Cordoba@hotmail.com	2710201451	00000000	000000000	t
+24	O & Dise?os	Mexico	Puebla	Tehuacan	Av. 5	18 Poniente 4101	0001	San nicolas	Tehuacan	75770	Diseño_creativo@hotmail.com	2386546465	00000000	000000000	t
+25	Playeras tejedor	Mexico	Veracruz	Xalapa	Clavijero	52Cc	C456	Centro	Xalapa	91000	tejedor@hotmail.com	245615863	00000000	000000000	t
+26	Consorcio Matex	Mexico	Veracruz	Rio Blanco	Avenida placido matas	0007	sin numero	Salvador Gonzalez	Rio Blanco	94730	Matex@hotmail.com	272146696	00000000	000000000	t
+27	RDMN Solar S.A de C.V	Mexico	Veracruz	San andres tuxtla	Mangana	0001	sin numero	Fraccionamiento el Rodeo	San andres tuxtla	95765	emilianoZapata@gmail.com	12451223	00000000	000000000	t
+28	Impresion y arte imprenta	Mexico	Veracruz	Cordoba	av.5	0021	0226	Centro	Cordoba	94500	impresion@gmail.com	45647852	00000000	000000000	t
+29	Fefermex	Mexico	Veracruz	Minatitlan	Predio Encino Gordo	sin numero	sin numero	Acceso a la utopista	Minatitlan	96340	SecBeliciario@hotmail.com	00000000	555642315	000000000	t
+30	Telas Parisina	Mexico	Veracruz	Cordoba	3 y 5	5023	sin numero	Centro	Cordoba	94500	parisina@hotmail.com	00000000	2712353663	000000000	t
+31	Modatelas	Mexico	Veracruz	Poza Rica	Avenida Heriberto	sin numero	0001	Centro	Poza Rica	93200	Modatelas@hotmail.com	782135646	2712353663	000000000	t
+\.
+
+
+--
+-- TOC entry 2174 (class 0 OID 33637)
+-- Dependencies: 185
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY usuarios (codigo_usuario, usuario, contrasenia, tipo, nombre, apellido_paterno, apellido_materno, direccion, telefono, celular, correo, status) FROM stdin;
+1	admin	root	administrador	Francisco	Machuca	Rojas	avenida 25	7126649	2711206217	francisco_jmr_16@hotmail.com	t
+2	hector	root	empleado	Hector	Espinoza	Gomez	calle 21	7123549	2711145217	heresgo007@hotmail.com	t
+3	luis123	root	empleado	Luis	Fernandez	Vazquez	calle desconocida	7146547	2711234567	thekinser@hotmail.com	t
+4	perengano	root	empleado	Perengano	Imaginario	Gomez	calle 21	7123549	2711145217	perengano@hotmail.com	t
+\.
+
+
+--
+-- TOC entry 2171 (class 0 OID 33623)
+-- Dependencies: 182
+-- Data for Name: ventas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ventas (folio, codigo_cliente, codigo_usuario, fecha_y_hora) FROM stdin;
+1	10	2	2015-06-12 09:00:00-05
+2	8	3	2015-06-08 12:00:00-05
+3	8	3	2015-05-20 13:00:00-05
+4	5	2	2015-05-28 15:00:00-05
+5	11	4	2015-06-01 09:00:00-05
+6	13	2	2015-06-05 12:00:00-05
+7	15	3	2015-04-08 16:00:00-05
+8	17	2	2015-06-05 16:00:00-05
+9	20	4	2015-06-10 14:00:00-05
+10	21	4	2015-05-20 18:00:00-05
+\.
+
+
+--
+-- TOC entry 2190 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ventas_folio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ventas_folio_seq', 1, false);
+
+
+--
+-- TOC entry 2030 (class 2606 OID 33620)
+-- Name: categorias_de_productos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY categorias_de_productos
+    ADD CONSTRAINT categorias_de_productos_pkey PRIMARY KEY (id_categoria_producto);
+
+
+--
+-- TOC entry 2006 (class 2606 OID 33536)
+-- Name: clientes_correo_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY clientes
+    ADD CONSTRAINT clientes_correo_key UNIQUE (correo);
+
+
+--
+-- TOC entry 2014 (class 2606 OID 33557)
+-- Name: clientes_personas_fisicas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY clientes_personas_fisicas
+    ADD CONSTRAINT clientes_personas_fisicas_pkey PRIMARY KEY (id_cliente_fisico);
+
+
+--
+-- TOC entry 2010 (class 2606 OID 33548)
+-- Name: clientes_personas_morales_empresa_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY clientes_personas_morales
+    ADD CONSTRAINT clientes_personas_morales_empresa_key UNIQUE (empresa);
+
+
+--
+-- TOC entry 2012 (class 2606 OID 33546)
+-- Name: clientes_personas_morales_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY clientes_personas_morales
+    ADD CONSTRAINT clientes_personas_morales_pkey PRIMARY KEY (id_cliente_moral);
+
+
+--
+-- TOC entry 2008 (class 2606 OID 33534)
+-- Name: clientes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY clientes
+    ADD CONSTRAINT clientes_pkey PRIMARY KEY (codigo_cliente);
+
+
+--
+-- TOC entry 2018 (class 2606 OID 33579)
+-- Name: compras_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY compras
+    ADD CONSTRAINT compras_pkey PRIMARY KEY (folio);
+
+
+--
+-- TOC entry 2022 (class 2606 OID 33599)
+-- Name: contactos_proveedores_correo_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY contactos_proveedores
+    ADD CONSTRAINT contactos_proveedores_correo_key UNIQUE (correo);
+
+
+--
+-- TOC entry 2024 (class 2606 OID 33597)
+-- Name: contactos_proveedores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY contactos_proveedores
+    ADD CONSTRAINT contactos_proveedores_pkey PRIMARY KEY (id_contacto);
+
+
+--
+-- TOC entry 2020 (class 2606 OID 33587)
+-- Name: detalles_de_compras_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY detalles_de_compras
+    ADD CONSTRAINT detalles_de_compras_pkey PRIMARY KEY (codigo_compra);
+
+
+--
+-- TOC entry 2034 (class 2606 OID 33636)
+-- Name: detalles_de_ventas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY detalles_de_ventas
+    ADD CONSTRAINT detalles_de_ventas_pkey PRIMARY KEY (codigo_detalle);
+
+
+--
+-- TOC entry 2026 (class 2606 OID 33611)
+-- Name: productos_clave_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY productos
+    ADD CONSTRAINT productos_clave_key UNIQUE (clave);
+
+
+--
+-- TOC entry 2028 (class 2606 OID 33609)
+-- Name: productos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY productos
+    ADD CONSTRAINT productos_pkey PRIMARY KEY (codigo_producto);
+
+
+--
+-- TOC entry 2016 (class 2606 OID 33571)
+-- Name: proveedores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY proveedores
+    ADD CONSTRAINT proveedores_pkey PRIMARY KEY (codigo_proveedor);
+
+
+--
+-- TOC entry 2036 (class 2606 OID 33649)
+-- Name: usuarios_correo_usuario_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuarios_correo_usuario_key UNIQUE (correo, usuario);
+
+
+--
+-- TOC entry 2038 (class 2606 OID 33647)
+-- Name: usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuarios_pkey PRIMARY KEY (codigo_usuario);
+
+
+--
+-- TOC entry 2032 (class 2606 OID 33628)
+-- Name: ventas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ventas
+    ADD CONSTRAINT ventas_pkey PRIMARY KEY (folio);
+
+
+--
+-- TOC entry 2050 (class 2620 OID 33800)
+-- Name: trigger_ventas; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER trigger_ventas AFTER INSERT OR DELETE OR UPDATE ON detalles_de_ventas FOR EACH ROW EXECUTE PROCEDURE funcion_ventas();
+
+
+--
+-- TOC entry 2040 (class 2606 OID 33700)
+-- Name: fk_clientes_fisicos; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY clientes_personas_fisicas
+    ADD CONSTRAINT fk_clientes_fisicos FOREIGN KEY (codigo_cliente) REFERENCES clientes(codigo_cliente);
+
+
+--
+-- TOC entry 2039 (class 2606 OID 33695)
+-- Name: fk_clientes_morales; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY clientes_personas_morales
+    ADD CONSTRAINT fk_clientes_morales FOREIGN KEY (codigo_cliente) REFERENCES clientes(codigo_cliente);
+
+
+--
+-- TOC entry 2047 (class 2606 OID 33690)
+-- Name: fk_codigo_cliente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ventas
+    ADD CONSTRAINT fk_codigo_cliente FOREIGN KEY (codigo_cliente) REFERENCES clientes(codigo_cliente);
+
+
+--
+-- TOC entry 2043 (class 2606 OID 33665)
+-- Name: fk_codigo_producto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_compras
+    ADD CONSTRAINT fk_codigo_producto FOREIGN KEY (codigo_producto) REFERENCES productos(codigo_producto);
+
+
+--
+-- TOC entry 2049 (class 2606 OID 33680)
+-- Name: fk_codigo_producto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_ventas
+    ADD CONSTRAINT fk_codigo_producto FOREIGN KEY (codigo_producto) REFERENCES productos(codigo_producto);
+
+
+--
+-- TOC entry 2046 (class 2606 OID 33685)
+-- Name: fk_codigo_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ventas
+    ADD CONSTRAINT fk_codigo_usuario FOREIGN KEY (codigo_usuario) REFERENCES usuarios(codigo_usuario);
+
+
+--
+-- TOC entry 2041 (class 2606 OID 33655)
+-- Name: fk_compras; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY compras
+    ADD CONSTRAINT fk_compras FOREIGN KEY (codigo_proveedor) REFERENCES proveedores(codigo_proveedor);
+
+
+--
+-- TOC entry 2044 (class 2606 OID 33650)
+-- Name: fk_contactos_proveedores_proveedor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY contactos_proveedores
+    ADD CONSTRAINT fk_contactos_proveedores_proveedor FOREIGN KEY (codigo_proveedor) REFERENCES proveedores(codigo_proveedor);
+
+
+--
+-- TOC entry 2042 (class 2606 OID 33660)
+-- Name: fk_folio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_compras
+    ADD CONSTRAINT fk_folio FOREIGN KEY (folio) REFERENCES compras(folio);
+
+
+--
+-- TOC entry 2048 (class 2606 OID 33675)
+-- Name: fk_folio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalles_de_ventas
+    ADD CONSTRAINT fk_folio FOREIGN KEY (folio) REFERENCES ventas(folio);
+
+
+--
+-- TOC entry 2045 (class 2606 OID 33670)
+-- Name: fk_id_categoria; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY productos
+    ADD CONSTRAINT fk_id_categoria FOREIGN KEY (id_categoria_producto) REFERENCES categorias_de_productos(id_categoria_producto);
+
+
+--
+-- TOC entry 2181 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-08-06 21:23:25
+
+--
+-- PostgreSQL database dump complete
+--
+

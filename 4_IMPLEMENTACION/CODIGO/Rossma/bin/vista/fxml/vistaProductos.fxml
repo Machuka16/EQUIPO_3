@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1210.0" styleClass="AnchorPrincipal" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorProductos">
+   <children>
+      <Pagination fx:id="paginador" layoutX="567.0" layoutY="91.0" pageCount="100" prefHeight="511.0" prefWidth="630.0" />
+      <ToolBar minHeight="-Infinity" prefHeight="40.0" prefWidth="1210.0" styleClass="tool-bar2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button id="buttonTop" fx:id="btnActualizar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actualizar" prefHeight="35.0" prefWidth="40.0" translateX="900.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/system_software_update.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Actualizar" />
+               </tooltip>
+            </Button>
+            <Button id="buttonTop" fx:id="btnNuevo" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_nuevo" prefHeight="35.0" prefWidth="40.0" translateX="920.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Empty-Document-New-48.png" />
+                     </image></ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Nuevo" />
+               </tooltip></Button>
+            <Button id="buttonTop" fx:id="btnInsertar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_insertar" prefHeight="35.0" prefWidth="40.0" translateX="940.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/filesaveas-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Guardar" />
+               </tooltip></Button>
+            <Button id="buttonTop" fx:id="btnEliminar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_eliminar" prefHeight="35.0" prefWidth="40.0" translateX="960.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Delete-File-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Eliminar" />
+               </tooltip></Button>
+            <Button id="buttonTop" fx:id="btnReciclaje" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_reciclaje" prefHeight="35.0" prefWidth="40.0" translateX="980.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Trash-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Reciclaje" />
+               </tooltip></Button>
+         </items>
+      </ToolBar>
+      <TitledPane fx:id="tpGeneral" collapsible="false" layoutX="13.0" layoutY="56.0" prefHeight="235.0" prefWidth="547.0" text="General" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="51.0">
+         <content>
+            <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="1183.0" styleClass="tool-bar2">
+               <children>
+                  <TextArea fx:id="txaDescripcion" layoutX="31.0" layoutY="120.0" prefHeight="49.0" prefWidth="440.0" />
+                  <Label layoutX="175.0" layoutY="90.0" text="Descripción del producto." />
+                  <Button id="buttonTop" fx:id="btnCategoria" layoutX="470.0" layoutY="31.0" mnemonicParsing="false" onAction="#click_emergente" prefHeight="30.0" prefWidth="70.0">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Añadir categoria." />
+                     </tooltip>
+                  </Button>
+                  <TextField fx:id="txtClave" layoutX="24.0" layoutY="37.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                  <Label layoutX="68.0" layoutY="2.0" text="Clave" />
+                  <ComboBox fx:id="cbUnidad" layoutX="175.0" layoutY="38.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                  <Label layoutX="208.0" layoutY="2.0" text="Unidad " />
+                  <ComboBox fx:id="cbCategoria" layoutX="340.0" layoutY="38.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                  <Label layoutX="367.0" layoutY="2.0" text="Categoría" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="13.0" layoutY="298.0" prefHeight="152.0" prefWidth="547.0" text="Precios" AnchorPane.leftAnchor="13.0">
+        <content>
+          <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="163.0" prefWidth="500.0" styleClass="tool-bar2">
+               <children>
+                  <TextField fx:id="txtPrecio1" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="62.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                  <Label layoutX="64.0" layoutY="29.0" text="Público" />
+                  <Label layoutX="378.0" layoutY="29.0" text="Mayoreo" />
+                  <TextField fx:id="txtPrecio2" alignment="CENTER_RIGHT" layoutX="346.0" layoutY="62.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                  <Label layoutX="36.0" layoutY="69.0" text="\$" />
+                  <Label layoutX="354.0" layoutY="69.0" text="\$" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="13.0" layoutY="460.0" prefHeight="127.0" prefWidth="547.0" text="Inventario" AnchorPane.leftAnchor="13.0">
+        <content>
+          <AnchorPane id="AnchorPaneTitled" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tool-bar2">
+               <children>
+                  <GridPane layoutX="12.0" layoutY="14.0" prefHeight="68.0" prefWidth="476.0">
+                    <columnConstraints>
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Stock Máximo" />
+                        <Label text="Stock Mínimo" GridPane.columnIndex="1" />
+                        <Label text="Existencia" GridPane.columnIndex="2" />
+                        <TextField fx:id="txtMaxima" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtMinima" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtActual" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TableView fx:id="tablaProductos" layoutX="567.0" layoutY="94.0" onMouseClicked="#click_tabla" opacity="0.58" prefHeight="446.0" prefWidth="630.0" AnchorPane.leftAnchor="567.0" AnchorPane.rightAnchor="13.0">
+        <columns>
+            <TableColumn fx:id="tcClave" prefWidth="70.0" text="Clave" />
+          <TableColumn fx:id="tcDescripcion" prefWidth="292.0" text="Nombre" />
+          <TableColumn fx:id="tcUnidad" minWidth="0.0" prefWidth="70.0" text="Unidad" />
+            <TableColumn fx:id="tcCategoria" prefWidth="100.0" text="Categoría" />
+            <TableColumn fx:id="tcMaxima" prefWidth="70.0" text="Máxima" />
+            <TableColumn fx:id="tcMinima" prefWidth="70.0" text="Mínima" />
+            <TableColumn fx:id="tcActual" prefWidth="70.0" text="ACTUAL" />
+            <TableColumn fx:id="tcPrecio1" prefWidth="70.0" text="PRECIO PUBLICO" />
+            <TableColumn fx:id="tcPrecio2" prefWidth="70.0" text="PRECIO MAYOREO" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblMensaje" alignment="CENTER_RIGHT" layoutX="856.0" layoutY="51.0" prefHeight="30.0" prefWidth="340.0" AnchorPane.rightAnchor="13.0" />
+      <Label fx:id="lblRegistro" alignment="CENTER" layoutX="68.0" layoutY="628.0" prefHeight="30.0" textAlignment="CENTER" textFill="#f8d3d0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Baskerville Old Face" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFiltrar" layoutX="605.0" layoutY="50.0" onKeyReleased="#buscarTexto" prefHeight="35.0" prefWidth="250.0" promptText="Buscar" styleClass="buttonSearch" AnchorPane.topAnchor="50.0">
+         <tooltip>
+            <Tooltip text="Busca tus productos aqui." />
+         </tooltip>
+      </TextField>
+      <ImageView fitHeight="35.0" fitWidth="70.0" layoutX="567.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="51.0">
+         <image>
+            <Image url="@../imagenes/Xp-G5%20009.png" />
+         </image>
+      </ImageView>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

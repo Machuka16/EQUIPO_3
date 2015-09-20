@@ -1,0 +1,376 @@
+/****************************************/
+/**********Formato de los Labels*********/
+/****************************************/
+
+#label-tool{
+	-fx-font-size: 40px;
+   	-fx-font-family: "Calisto MT";
+   	-fx-fill: #818181;
+   	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+
+.label {
+	-fx-text-fill: #fff;
+	-fx-font-size: 14;
+	-fx-font-family: "Bodoni Bk BT";
+	-fx-font-style: italic;
+}
+
+/****************************************/
+/**********Formato de los Labels*********/
+/****************************************/
+
+.tool-bar{
+	/*-fx-background-color: rgba(226,226,226,1);*/
+	/*-fx-background-color:  linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,44,79,1) 27%,rgba(41,44,79,1) 53%,rgba(41,44,79,1) 71%,rgba(41,44,79,1) 100%);*/
+		
+}
+
+.tool-bar2{
+	/*-fx-background-color: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(43,43,43,1) 0%, rgba(89,89,89,1) 16%, rgba(102,102,102,1) 28%, rgba(71,71,71,1) 48%, rgba(19,19,19,1) 100%);*/
+	-fx-background-color:  linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,44,79,1) 27%,rgba(41,44,79,1) 53%,rgba(41,44,79,1) 71%,rgba(41,44,79,1) 100%);
+	
+}
+
+#AnchorPrincipal{
+	/*-fx-background-color: #fff;*/
+		-fx-background-color:  linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,44,79,1) 27%,rgba(41,44,79,1) 53%,rgba(41,44,79,1) 71%,rgba(41,44,79,1) 100%);
+		
+		
+}
+
+
+.titled-pane:expanded{
+	-fx-background-color: #000;
+}
+
+/****************************************/
+/**********Formato de los Labels*********/
+/****************************************/
+
+
+/****************************************/
+/********Formato de los TextFields*******/
+/****************************************/
+
+.text-field{
+	  	 -fx-background-color: #fff;
+	 -fx-effect: innershadow( three-pass-box, rgba(0,0,0,0.9) , 9, 0.5 , 3 , 3 );	
+     -fx-border-radius: 5;
+     -fx-text-fill: black;
+	 -fx-font-size: 12pt;
+    -fx-font-family: "Bodoni Bk BT"; 
+    -fx-font-style: italic;
+    -fx-opacity: 0.5;
+}
+
+/****************************************/
+/**********Formato de los Botones********/
+/****************************************/
+
+.button {
+	-fx-font-family: "Bodoni Bd BT"; 
+	-fx-font-style: italic;
+	-fx-font-size: 14 pt;
+	-fx-text-fill: white;
+ 	-fx-padding: 5 22 5 22;   
+    -fx-background-radius: 0;
+	-fx-background-color: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(43,43,43,1) 0%, rgba(89,89,89,1) 16%, rgba(102,102,102,1) 28%, rgba(71,71,71,1) 48%, rgba(19,19,19,1) 100%);
+	-fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(43,43,43,1) 0%, rgba(89,89,89,1) 16%, rgba(102,102,102,1) 28%, rgba(71,71,71,1) 48%, rgba(19,19,19,1) 100%);
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: black;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    /*-fx-border-width: 1, 1;*/
+    /*-fx-border-style: solid, segments(3, 3);*/
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:pressed {
+	 -fx-border-color: none;
+	 -fx-border-radius: none;
+	
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #fff;
+}
+
+#buttonTop{
+	-fx-font-family: "Bodoni Bd BT"; 
+	-fx-font-style: italic;
+	-fx-text-fill: white;
+ 	-fx-padding: 5 22 5 22;   
+ 	
+   /* -fx-border-color: #000;
+    -fx-border-width: 2;*/
+    -fx-background-color: none;
+	/*-fx-background-color: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(43,43,43,1) 0%, rgba(89,89,89,1) 16%, rgba(102,102,102,1) 28%, rgba(71,71,71,1) 48%, rgba(19,19,19,1) 100%);*/
+	-fx-background-insets: 0 0 0 0, 0, 1, 2;
+	/*-fx-border-style: none;
+	-fx-border-insets: none;*/
+	
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+    
+/*.buttonSearch {
+	-fx-font-family: "Bodoni Bk BT";
+	-fx-font-style: italic;   
+    -fx-border-color: blue;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-color: #fff;
+    -fx-text-fill: black;
+}*/
+  
+.buttonSearch:hover {
+	-fx-font-family: "Bodoni Bk BT";
+	-fx-font-style: italic;   
+    -fx-border-color: blue;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-color: #fff;
+    -fx-text-fill: black;
+}   
+
+.buttonSearch:pressed, .buttonSearch:default:hover:pressed {
+  -fx-background-color: #fff;
+  -fx-text-fill: black;
+}
+    
+.buttonSearch:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.buttonSearch:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #fff;
+}    
+
+.buttonSearch:disabled, .buttonSearch:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #fff;
+    -fx-text-fill: white;
+}
+    
+
+
+/****************************************/
+/*********Formato de los TabPanels*******/
+/****************************************/
+
+.tabB {
+ -fx-padding: 5 22 5 22; 
+ -fx-text-fill: #fff;  
+    -fx-border-color: #000;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: rgba(0,0,0,0); 
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-text-fill: white;
+    }
+
+.tab-panel .tab:top{
+	-fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;	
+}
+
+.tab-pane .tab-header-area .tab-header-background { 
+	-fx-effect: null;
+} 
+
+.tab-pane {
+	-fx-tab-min-height: 40;
+	-fx-tab-max-height: 80;
+	
+}
+
+.tab-panel .tab-header-background{
+	/*-fx-background-color: rgba(0,0,0,0);*/
+	-fx-background-color: white;
+	
+}
+
+.titled-pane {
+	 -fx-text-fill: #000;
+	 -fx-background-color: white;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:top:selected {
+	-fx-background-color:linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(133,146,158,1) 30%,
+    	rgba(209,209,209,1) 58%, rgba(126,131,133,1) 87%, rgba(126,131,133,1) 100%
+    );
+    -fx-text-fill: white;
+}
+
+/****************************************/
+/********Formato de las TableView********/
+/****************************************/
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    /*-fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;*/
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Bodoni Bk BT";
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+
+/****************************************/
+/*********Formato del List View*********/
+/****************************************/
+
+.list-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    /*-fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;*/
+    -fx-padding: 5;
+}
+
+/****************************************/
+/*********Formato de los MenuBar*********/
+/****************************************/
+
+.menu-bar {
+    -fx-background-color: linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(133,146,158,1) 
+    	30%, rgba(209,209,209,1) 58%, rgba(126,131,133,1) 87%, rgba(126,131,133,1) 100%
+    );
+    
+}
+
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Bodoni Bk BT";
+    -fx-font-style: italic;
+    -fx-text-fill: #000;
+}
+
+.menu-bar:hover {
+	-fx-background-color: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(43,43,43,1) 0%, rgba(89,89,89,1) 16%, rgba(102,102,102,1) 28%, rgba(71,71,71,1) 48%, rgba(19,19,19,1) 100%);
+    -fx-font-size: 14pt;
+    -fx-font-family: "Bodoni Bk BT";
+    -fx-font-style: italic;
+}
+
+
+/****************************************/
+/************Formato de Todo*************/
+/****************************************/
+
+.menu .left-container {
+	-fx-background-color: black;
+}
+.menu .container .menu:openvertically .label .text{
+	-fx-font-style: normal;
+	-fx-font-family: "Bodoni Bk BT";
+	-fx-font-style: italic;
+}
+/*
+.anchor {  
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Bodoni Bk BT";
+    -fx-font-size: 10pt;
+    -fx-text-fill: #fff;
+    -fx-font-style: italic;
+}
+
+.anchor:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.anchor:disabled, .anchor:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+
+
+.anchor:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.anchor:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}*/	
+
+.tab-pane .tab-header-area .tab-header-background{
+	-fx-background-color: transparent   ;
+}
+
+
+
+.text-login{
+	-fx-background-color: white ;
+}

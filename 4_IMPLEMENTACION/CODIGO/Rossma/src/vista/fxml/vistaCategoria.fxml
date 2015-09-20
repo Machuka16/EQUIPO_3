@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="263.0" prefWidth="427.0" styleClass="tool-bar2" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorCategorias">
+   <children>
+      <SplitPane dividerPositions="0.5376884422110553" prefHeight="263.0" prefWidth="427.0" AnchorPane.leftAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="250.0" prefWidth="211.0" styleClass="tool-bar2">
+               <children>
+                  <TextField fx:id="txtCategoria" layoutX="46.0" layoutY="131.0" prefHeight="38.0" prefWidth="150.0" />
+                  <Label layoutX="51.0" layoutY="80.0" text="Nombre Categoría" />
+                  <ToolBar layoutX="14.0" layoutY="14.0" prefHeight="55.0" prefWidth="252.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <Button id="buttonTop" fx:id="btnNuevo" mnemonicParsing="false" onAction="#click_nuevo" prefHeight="35.0" prefWidth="70.0">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/Empty-Document-New-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Nueva categoria." />
+                           </tooltip></Button>
+                        <Button id="buttonTop" fx:id="btnInsertar" mnemonicParsing="false" onAction="#click_insertar" prefHeight="25.0" prefWidth="73.0">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/filesaveas-256.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Guardar categoria." />
+                           </tooltip></Button>
+                        <Button id="buttonTop" fx:id="btnEliminar" mnemonicParsing="false" onAction="#click_eliminar">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/Delete-File-256.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Eliminar categoria." />
+                           </tooltip></Button>
+                     </items>
+                     <styleClass>
+                        <String fx:value="tab-panel" />
+                        <String fx:value="tabB" />
+                     </styleClass>
+                  </ToolBar>
+                  <Label fx:id="lblMensaje" layoutX="84.0" layoutY="201.0" prefHeight="25.0" prefWidth="242.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minWidth="-Infinity" prefHeight="250.0" prefWidth="181.0" styleClass="tool-bar2">
+               <children>
+                  <TableView fx:id="tablaCategorias" onMouseClicked="#click_tabla" opacity="0.58" prefHeight="261.0" prefWidth="181.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="tcCategoria" prefWidth="176.0" text="Categoría" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

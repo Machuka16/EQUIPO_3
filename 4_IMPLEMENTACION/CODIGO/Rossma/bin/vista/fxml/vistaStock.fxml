@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1210.0" styleClass="AnchorPrincipal" stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorStock">
+   <children>
+      <TableView fx:id="tablaStock" layoutX="43.0" layoutY="343.0" onMouseClicked="#seleccionar" opacity="0.58" prefHeight="257.0" prefWidth="1184.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0">
+         <columns>
+            <TableColumn fx:id="tcDescripcion" prefWidth="350.0" text="Producto" />
+            <TableColumn fx:id="tcUnidad" prefWidth="120.0" text="Unidad" />
+            <TableColumn fx:id="tcCategoria" prefWidth="120.0" text="Categoría" />
+            <TableColumn fx:id="tcMaxima" prefWidth="120.0" text="Máximo" />
+            <TableColumn fx:id="tcMinima" prefWidth="120.0" text="Mínimo" />
+            <TableColumn fx:id="tcActual" prefWidth="120.0" text="Actual" />
+            <TableColumn fx:id="tcCausa" prefWidth="250.0" text="Causa" />
+         </columns>
+      </TableView>
+      <TitledPane animated="false" collapsible="false" layoutX="39.0" layoutY="25.0" prefHeight="276.0" prefWidth="1182.0" text="Datos" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="51.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="1180.0" styleClass="tool-bar2">
+               <children>
+                  <TextField fx:id="txtClave" layoutX="167.0" layoutY="40.0" />
+                  <TextField fx:id="txtProducto" layoutX="167.0" layoutY="139.0" prefHeight="37.0" prefWidth="320.0" />
+                  <TextField fx:id="txtActual" layoutX="664.0" layoutY="40.0" prefHeight="37.0" prefWidth="96.0" />
+                  <TextArea fx:id="txaCausa" layoutX="664.0" layoutY="139.0" prefHeight="60.0" prefWidth="400.0" />
+                  <Label layoutX="68.0" layoutY="50.0" text="Clave" />
+                  <Label layoutX="68.0" layoutY="148.0" text="Producto" />
+                  <Label layoutX="575.0" layoutY="148.0" text="Causa" />
+                  <Label layoutX="575.0" layoutY="50.0" text="Existencia" />
+                  <Label layoutX="834.0" layoutY="50.0" text="Nueva existencia" />
+                  <TextField fx:id="txtNueva" layoutX="968.0" layoutY="40.0" prefHeight="37.0" prefWidth="96.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <ToolBar layoutX="14.0" layoutY="11.0" minHeight="-Infinity" prefHeight="40.0" prefWidth="1210.0" styleClass="tool-bar2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button id="buttonTop" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#limpiar" prefHeight="35.0" prefWidth="40.0" translateX="1070.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/Empty-Document-New-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Nuevo" />
+               </tooltip>
+            </Button>
+          <Button id="buttonTop" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actualizar" prefHeight="35.0" prefWidth="40.0" translateX="1090.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/filesaveas-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Actualizar" />
+               </tooltip>
+            </Button>
+         </items>
+      </ToolBar>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

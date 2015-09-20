@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="425.0" layoutX="14.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="525.0" />
+      <Text layoutX="130.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer in code es un equipo de trabajo integrado por:" />
+      <Text layoutX="191.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Francisco Javier Machuca Rojas." />
+      <Text layoutX="197.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hector Rene Espinoza Gomez" />
+      <Text layoutX="194.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luis Angel Fernandez Vazquez" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="202.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/stickers-decorativos-tigres%20(1).jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
